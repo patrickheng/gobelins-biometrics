@@ -22,7 +22,7 @@ export default Vue.extend({
 
   ready: function() {
 
-    this.addEventListener();
+    this.addEventListeners();
 
     this.generateGSAPTimeline();
 
@@ -37,13 +37,23 @@ export default Vue.extend({
     bind: function() {
     },
 
-    addEventListener: function() {
+    addEventListeners: function() {
 
       this.$on(WINDOW_RESIZE, this.onWindowResize);
 
       this.$on(SIDEBAR_TOGGLE, this.onSidebarToggle);
 
       document.addEventListener('keyup', ::this.onKeyUp, false);
+
+    },
+
+    removeEventListeners: function() {
+
+      this.$off(WINDOW_RESIZE, this.onWindowResize);
+
+      this.$off(SIDEBAR_TOGGLE, this.onSidebarToggle);
+
+      document.removeEventListener('keyup', ::this.onKeyUp, false);
 
     },
 

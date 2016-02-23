@@ -10,20 +10,20 @@ export default Vue.extend({
 
   template: require('./template.html'),
 
-  data: function() {
+  data() {
 
     return {
     };
   },
 
-  created: function() {
+  created() {
 
     this.bind();
   },
 
-  ready: function() {
+  ready() {
 
-    this.addEventListener();
+    this.addEventListeners();
   },
 
   methods: {
@@ -32,11 +32,11 @@ export default Vue.extend({
      * Binding & Events
      */
 
-    bind: function() {
+    bind() {
       this.onResize = debounce(this.broadcastWindowSize, 200);
     },
 
-    addEventListener: function() {
+    addEventListeners() {
 
       // Resize
       window.addEventListener('resize', this.onResize, false);
@@ -45,7 +45,7 @@ export default Vue.extend({
     /*
      * Resize
      */
-    broadcastWindowSize: function() {
+    broadcastWindowSize() {
 
       this.$broadcast(WINDOW_RESIZE, window.innerWidth, window.innerHeight);
     }

@@ -23,7 +23,7 @@ class Main {
 
     this.bind();
 
-    this.addEventListener();
+    this.addEventListeners();
 
     this.initilizeRouter();
 
@@ -32,7 +32,7 @@ class Main {
 
   bind() {}
 
-  addEventListener() {}
+  addEventListeners() {}
 
   initilizeRouter() {
 

@@ -4,28 +4,41 @@ import {
 	WINDOW_RESIZE
 } from '../../config/messages';
 
+import raf from 'raf';
+
 import 'gsap';
+
 
 export default Vue.extend({
 
   template: require('./template.html'),
 
-  data: function() {
+  data() {
 
     return {
     };
   },
 
-  created: function() {
+  created() {
+
     this.bind();
   },
 
-  ready: function() {
+  ready() {
 
-    this.addEventListener();
+    this.addEventListeners();
+
     this.createGSAPTimeline();
 
-    this.frigerPrintTweening = false;
+    this.render();
+
+    this.mouseIsDown = false;
+    this.mouseIsIn = false;
+  },
+
+  beforeDestroy() {
+
+    this.removeEventListeners();
   },
 
   methods: {
@@ -34,32 +47,65 @@ export default Vue.extend({
      * Binding & Events
      */
 
-    bind: function() {
+    bind() {
     },
 
-    addEventListener: function() {
+    addEventListeners() {
       this.$on(WINDOW_RESIZE, this.onWindowResize);
+      document.addEventListener('mouseup', this.onMouseUp, false);
+      document.addEventListener('mouseDown', this.onMouseDown, false);
     },
 
-    createGSAPTimeline: function() {
+    removeEventListeners() {
+      this.$off(WINDOW_RESIZE, this.onWindowResize);
+      document.removeEventListener('mouseup', this.onMouseUp, false);
+      document.removeEventListener('mouseDown', this.onMouseDown, false);
+    },
+
+    createGSAPTimeline() {
       this.fingerprintTl = new TimelineMax({paused: true});
-
-      console.log(this.$els);
+      this.fingerprintTl.fromTo(this.$els.holdindication, 2, {width: 0 }, {width: 155, ease: Expo.easeOut});
+      this.fingerprintTlDuration = this.fingerprintTl.duration();
     },
 
-    onWindowResize: function(width, height) {
+    render() {
+      if(this.mouseIsDown) {
+        const time = this.fingerprintTl.time();
+
+        if(time < this.fingerprintTlDuration) {
+          this.fingerprintTl.seek(time + 0.01);
+          this.raf = raf(this.render());
+        }
+      }
+    },
+
+    onWindowResize(width, height) {
       console.log('Window resize from application.', width, height);
     },
 
-    onFingerprintMouseDown: function() {
-      this.frigerPrintTweening = true;
+    onMouseDown() {
+      this.mouseIsDown = true;
     },
 
-    onFingerprintMouseMove: function() {
-    }
-    ,
-    onFingerprintMouseLeave: function() {
-      this.frigerPrintTweening = false;
+    onMouseUp() {
+      this.mouseIsDown = false;
+    },
+
+    onFingerprintMouseDown() {
+
+    },
+
+    onFingerprintMouseMove() {
+      this.mouseIsIn = true;
+
+      setTimeout(()=>{
+        this.mouseIsIn = false;
+      }, 1000)
+    },
+
+    onFingerprintMouseLeave() {
+      this.mouseIsIn = false;
+      this.mouseIsDown = false;
     }
 
   },

@@ -13,20 +13,20 @@ export default Vue.extend({
 
   template: require('./template.html'),
 
-  data: function() {
+  data() {
 
     return {
       _hidden: null
     };
   },
 
-  created: function() {
+  created() {
     this.bind();
   },
 
-  ready: function() {
+  ready() {
 
-    this.addEventListener();
+    this.addEventListeners();
 
   },
 
@@ -36,18 +36,18 @@ export default Vue.extend({
      * Binding & Events
      */
 
-    bind: function() {
+    bind() {
     },
 
-    addEventListener: function() {
+    addEventListeners() {
       this.$on(WINDOW_RESIZE, this.onWindowResize);
     },
 
-    onWindowResize: function(width, height) {
+    onWindowResize(width, height) {
 
     },
 
-    toggleSideBar: function() {
+    toggleSideBar() {
       this.$broadcast(SIDEBAR_TOGGLE);
     }
 
