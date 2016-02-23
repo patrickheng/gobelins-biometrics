@@ -1,6 +1,4 @@
-# VueJs Boilerplate - Babel / Webpack / Sass
-
-![Banner](http://img15.hostingpics.net/thumbs/mini_691935vuejs4650x270.png)
+# Gobelins Biometrics
 
 #### TECHNOLOGIES
 
@@ -31,4 +29,4 @@ The project will be launched at http://localhost:3000/
 
 Hope you like it ¯\_(ツ)_/¯
 
-![Gif](https://media.giphy.com/media/SGjUlcZYnFs6Q/giphy.gif)
+![Gif](https://media.giphy.com/media/FyvIBVmvg95JK/giphy.gif)
