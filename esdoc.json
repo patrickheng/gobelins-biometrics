@@ -4,7 +4,7 @@
   "plugins": [
     { "name": "esdoc-es7-plugin" }
   ],
-  "title": "Vue Js boilerplate",
+  "title": "Gobelins Biometrics",
   "undocumentIdentifier": false,
   "access":	["public", "protected", "private"]
 }
