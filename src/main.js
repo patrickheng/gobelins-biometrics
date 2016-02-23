@@ -47,8 +47,8 @@ class Main {
 
     this.router.map({
 
-      '*': {
-        name: "home",
+      '/': {
+        name: "intro",
         component: IntroComponent
       },
 

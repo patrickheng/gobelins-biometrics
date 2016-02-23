@@ -1,7 +1,8 @@
 'use strict';
 
 import {
-	WINDOW_RESIZE
+	WINDOW_RESIZE,
+	SIDEBAR_TOGGLE
 } from '../../config/messages';
 
 export default Vue.extend({
@@ -11,7 +12,7 @@ export default Vue.extend({
   data: function() {
 
     return {
-      _hidden: null
+      isDisplay: false
     };
   },
 
@@ -34,11 +35,23 @@ export default Vue.extend({
     },
 
     addEventListener: function() {
+
       this.$on(WINDOW_RESIZE, this.onWindowResize);
+
+      this.$on(SIDEBAR_TOGGLE, this.onSidebarToggle);
+
     },
 
     onWindowResize: function(width, height) {
-      console.log('Window resize from application.', width, height);
+
+    },
+
+    onSidebarToggle: function() {
+
+      this.isDisplay = !this.isDisplay;
+
+      console.log('clicked');
+      
     }
 
   },

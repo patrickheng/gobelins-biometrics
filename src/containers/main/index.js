@@ -1,8 +1,11 @@
 'use strict';
 
 import {
-	WINDOW_RESIZE
+	WINDOW_RESIZE,
+	SIDEBAR_TOGGLE
 } from '../../config/messages';
+
+import infoSectionComponent from 'components/info-section';
 
 export default Vue.extend({
 
@@ -38,14 +41,18 @@ export default Vue.extend({
     },
 
     onWindowResize: function(width, height) {
-      console.log('Window resize from application.', width, height);
+
+    },
+
+    toggleSideBar: function() {
+      this.$broadcast(SIDEBAR_TOGGLE);
     }
 
   },
 
-  transitions: {
+  transitions: {},
 
-  },
-
-  components: {}
+  components: {
+    infoSectionComponent
+  }
 });
