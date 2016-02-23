@@ -4,10 +4,9 @@ import {
 	WINDOW_RESIZE
 } from '../../config/messages';
 
-import raf from 'raf';
-
 import 'gsap';
 
+import introBackgroundComponent from 'components/intro-background';
 
 export default Vue.extend({
 
@@ -111,5 +110,7 @@ export default Vue.extend({
 
   transitions: {},
 
-  components: {}
+  components: {
+    introBackgroundComponent
+  }
 });

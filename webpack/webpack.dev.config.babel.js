@@ -18,7 +18,7 @@ export default {
   resolve: {
     root: path.resolve( __dirname, '..', 'src' ),
     alias: {
-      'Container': 'helpers/Container'
+      'Container': 'utils/Container'
     },
     extensions: [
       '',
@@ -85,6 +85,7 @@ export default {
       '__PROD__': JSON.stringify(false)
     }),
     new webpack.ProvidePlugin({
+      'THREE': 'three',
       'Vue': 'vue'
     }),
     new CopyWebpackPlugin([
