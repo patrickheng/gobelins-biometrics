@@ -6,6 +6,8 @@ import domready from 'domready';
 
 import 'gsap';
 
+import 'stylesheets/main.scss';
+
 // Routes
 import IntroComponent from 'containers/intro';
 
