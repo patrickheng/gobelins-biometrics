@@ -23,6 +23,9 @@ export default Vue.extend({
   ready: function() {
 
     this.addEventListener();
+
+    this.generateGSAPTimeline();
+
   },
 
   methods: {
@@ -48,15 +51,31 @@ export default Vue.extend({
 
     onSidebarToggle: function() {
 
-      this.isDisplay = !this.isDisplay;
+      if(!this.isDisplay) {
+        this.isDisplay = true;
+        this.hideTl.stop();
+        this.showTl.play(0);
+      } else {
+        this.isDisplay = false;
+        this.showTl.stop();
+        this.hideTl.play(0);
+      }
+    },
 
-      console.log('clicked');
-      
+    generateGSAPTimeline: function() {
+      this.showTl = new TimelineMax({paused: true});
+
+      this.hideTl = new TimelineMax({paused: true});
+
+      // this.showTl.to(this.$el, 2, {x: '100%'}, {x: '0%', ease: Expo.easeOut});
+      // this.hideTl.to(this.$el, 2, {x: '0%'}, {x: '100%', ease: Expo.easeOut});
     }
 
   },
 
-  transitions: {},
+  transitions: {
+
+  },
 
   components: {}
 });

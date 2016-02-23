@@ -7,6 +7,8 @@ import {
 
 import infoSectionComponent from 'components/info-section';
 
+import 'gsap';
+
 export default Vue.extend({
 
   template: require('./template.html'),
@@ -25,6 +27,7 @@ export default Vue.extend({
   ready: function() {
 
     this.addEventListener();
+
   },
 
   methods: {
@@ -50,7 +53,8 @@ export default Vue.extend({
 
   },
 
-  transitions: {},
+  transitions: {
+  },
 
   components: {
     infoSectionComponent

@@ -5,6 +5,16 @@
   width: 50%;
   height: 100%;
   background: $color-white;
+
+  &.toggle-side-bar-transition {
+    transition: transform 1.3s ease(out-expo);
+  }
+  &.toggle-side-bar-enter {
+    transform: translate3d(100%, 0, 0);
+  }
+  &.toggle-side-bar-leave {
+    transform: translate3d(100%, 0, 0);
+  }
 }
 
 .info-section_container {
