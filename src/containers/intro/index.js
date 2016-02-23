@@ -30,8 +30,6 @@ export default Vue.extend({
 
     this.createGSAPTimeline();
 
-    this.render();
-
     this.mouseIsDown = false;
     this.mouseIsIn = false;
   },
@@ -53,30 +51,30 @@ export default Vue.extend({
     addEventListeners() {
       this.$on(WINDOW_RESIZE, this.onWindowResize);
       document.addEventListener('mouseup', this.onMouseUp, false);
-      document.addEventListener('mouseDown', this.onMouseDown, false);
+      document.addEventListener('mousedown', this.onMouseDown, false);
     },
 
     removeEventListeners() {
       this.$off(WINDOW_RESIZE, this.onWindowResize);
       document.removeEventListener('mouseup', this.onMouseUp, false);
-      document.removeEventListener('mouseDown', this.onMouseDown, false);
+      document.removeEventListener('mousedown', this.onMouseDown, false);
     },
 
     createGSAPTimeline() {
-      this.fingerprintTl = new TimelineMax({paused: true});
-      this.fingerprintTl.fromTo(this.$els.holdindication, 2, {width: 0 }, {width: 155, ease: Expo.easeOut});
+      TweenMax.from(this.$els.fingerprint, 5, {scale: 0, ease: Expo.easeOut});
+      TweenMax.from(this.$els.holdindicationunder, 10, {y: '100%', opacity: 0, ease: Expo.easeOut});
+
+      this.fingerprintTl = new TimelineMax({paused: true, onComplete: this.holdClickComplete});
+      this.fingerprintTl
+        .fromTo(this.$els.fingerprint, 3, {scale: 1}, {scale: 1.2, ease: RoughEase.ease}, 0)
+        .fromTo(this.$els.holdindication, 1, {opacity: 0}, {opacity: 1, ease: RoughEase.ease}, 0)
+        .fromTo(this.$els.holdindication, 5, {width: 0 }, {width: 155, ease: Expo.easeOut}, 0)
+        .fromTo(this.$els.holdindication, 2, {opacity: 0}, {opacity: 1, ease: RoughEase.ease}, 3);
       this.fingerprintTlDuration = this.fingerprintTl.duration();
     },
 
-    render() {
-      if(this.mouseIsDown) {
-        const time = this.fingerprintTl.time();
+    holdClickComplete() {
 
-        if(time < this.fingerprintTlDuration) {
-          this.fingerprintTl.seek(time + 0.01);
-          this.raf = raf(this.render());
-        }
-      }
     },
 
     onWindowResize(width, height) {
@@ -85,22 +83,23 @@ export default Vue.extend({
 
     onMouseDown() {
       this.mouseIsDown = true;
+
+      if(this.mouseIsIn) {
+        this.fingerprintTl.play();
+      }
+
     },
 
     onMouseUp() {
       this.mouseIsDown = false;
-    },
 
-    onFingerprintMouseDown() {
-
+      this.fingerprintTl.pause();
+      this.fingerprintTl.reverse();
+      console.log('mouseup');
     },
 
     onFingerprintMouseMove() {
       this.mouseIsIn = true;
-
-      setTimeout(()=>{
-        this.mouseIsIn = false;
-      }, 1000)
     },
 
     onFingerprintMouseLeave() {

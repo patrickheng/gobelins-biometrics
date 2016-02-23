@@ -46,6 +46,7 @@
 }
 
 .intro_fingerprint-instruction {
+  display: inline-block;
   color: $color-white;
   text-transform: uppercase;
   font-weight: bold;
@@ -53,7 +54,6 @@
   font-size: 1.5rem;
 
   &--above {
-    display: inline-block;
     position: absolute;
     top: -5px;
     left: -10px;

@@ -9,18 +9,18 @@ export default Vue.extend({
 
   template: require('./template.html'),
 
-  data: function() {
+  data() {
 
     return {
       isDisplay: false
     };
   },
 
-  created: function() {
+  created() {
     this.bind();
   },
 
-  ready: function() {
+  ready() {
 
     this.addEventListeners();
 
@@ -34,10 +34,10 @@ export default Vue.extend({
      * Binding & Events
      */
 
-    bind: function() {
+    bind() {
     },
 
-    addEventListeners: function() {
+    addEventListeners() {
 
       this.$on(WINDOW_RESIZE, this.onWindowResize);
 
@@ -47,7 +47,7 @@ export default Vue.extend({
 
     },
 
-    removeEventListeners: function() {
+    removeEventListeners() {
 
       this.$off(WINDOW_RESIZE, this.onWindowResize);
 
@@ -57,17 +57,17 @@ export default Vue.extend({
 
     },
 
-    onKeyUp: function(ev) {
+    onKeyUp(ev) {
       if (ev.keyCode === 27 && this.isDisplay) {
         this.closeSidebar();
       }
     },
 
-    onWindowResize: function(width, height) {
+    onWindowResize(width, height) {
 
     },
 
-    onSidebarToggle: function() {
+    onSidebarToggle() {
 
       if(!this.isDisplay) {
         this.showSidebar();
@@ -76,19 +76,19 @@ export default Vue.extend({
       }
     },
 
-    showSidebar: function() {
+    showSidebar() {
       this.isDisplay = true;
       this.hideTl.stop();
       this.showTl.play(0);
     },
 
-    closeSidebar: function() {
+    closeSidebar() {
       this.isDisplay = false;
       this.showTl.stop();
       this.hideTl.play(0);
     },
 
-    generateGSAPTimeline: function() {
+    generateGSAPTimeline() {
       this.showTl = new TimelineMax({paused: true});
 
       this.hideTl = new TimelineMax({paused: true});
