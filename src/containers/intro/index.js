@@ -4,6 +4,8 @@ import {
 	WINDOW_RESIZE
 } from '../../config/messages';
 
+import 'gsap';
+
 export default Vue.extend({
 
   template: require('./template.html'),
@@ -11,7 +13,6 @@ export default Vue.extend({
   data: function() {
 
     return {
-      _hidden: null
     };
   },
 
@@ -22,6 +23,9 @@ export default Vue.extend({
   ready: function() {
 
     this.addEventListener();
+    this.createGSAPTimeline();
+
+    this.frigerPrintTweening = false;
   },
 
   methods: {
@@ -37,8 +41,25 @@ export default Vue.extend({
       this.$on(WINDOW_RESIZE, this.onWindowResize);
     },
 
+    createGSAPTimeline: function() {
+      this.fingerprintTl = new TimelineMax({paused: true});
+
+      console.log(this.$els);
+    },
+
     onWindowResize: function(width, height) {
       console.log('Window resize from application.', width, height);
+    },
+
+    onFingerprintMouseDown: function() {
+      this.frigerPrintTweening = true;
+    },
+
+    onFingerprintMouseMove: function() {
+    }
+    ,
+    onFingerprintMouseLeave: function() {
+      this.frigerPrintTweening = false;
     }
 
   },

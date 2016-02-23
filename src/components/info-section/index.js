@@ -43,6 +43,14 @@ export default Vue.extend({
 
       this.$on(SIDEBAR_TOGGLE, this.onSidebarToggle);
 
+      document.addEventListener('keyup', ::this.onKeyUp, false);
+
+    },
+
+    onKeyUp: function(ev) {
+      if (ev.keyCode === 27 && this.isDisplay) {
+        this.closeSidebar();
+      }
     },
 
     onWindowResize: function(width, height) {
@@ -52,14 +60,22 @@ export default Vue.extend({
     onSidebarToggle: function() {
 
       if(!this.isDisplay) {
-        this.isDisplay = true;
-        this.hideTl.stop();
-        this.showTl.play(0);
+        this.showSidebar();
       } else {
-        this.isDisplay = false;
-        this.showTl.stop();
-        this.hideTl.play(0);
+        this.closeSidebar();
       }
+    },
+
+    showSidebar: function() {
+      this.isDisplay = true;
+      this.hideTl.stop();
+      this.showTl.play(0);
+    },
+
+    closeSidebar: function() {
+      this.isDisplay = false;
+      this.showTl.stop();
+      this.hideTl.play(0);
     },
 
     generateGSAPTimeline: function() {

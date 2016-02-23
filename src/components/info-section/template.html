@@ -1,10 +1,10 @@
-<div class="info-section_wrapper" v-el="wrapper" v-show="isDisplay" transition="toggle-side-bar">
+<div class="info-section_wrapper" v-show="isDisplay" transition="toggle-side-bar">
 
-  <div class="info-section_container" v-el="container">
+  <div class="info-section_container">
 
     SideBar Info
 
-    <button>close</button>
+    <button v-on:click="closeSidebar">close</button>
 
   </div>
 

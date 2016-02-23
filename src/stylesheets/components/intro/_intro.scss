@@ -3,5 +3,65 @@
   position: relative;
   width: 100%;
   height: 100%;
-  background: lightgrey;
+  background: $color-black;
+  color: $color-white;
+}
+
+.intro_fingerprint-container {
+  position: absolute;
+  left: 50%;
+  bottom: 3rem;
+  cursor: pointer;
+  text-align: center;
+  transform: translate3d(-50%, 0, 0);
+
+  &:hover {
+    .intro_fingerprint-icon {
+      stroke: #f04141;
+    }
+    path {
+      stroke-dashoffset: 2000;
+      transition: stroke 0.4s ease-out, stroke-dashoffset 1.5s ease-out;
+    }
+  }
+}
+
+.intro_fingerprint-icon {
+  display: block;
+  margin: 0rem auto 2rem auto;
+  width: 10rem;
+  fill: none;
+  stroke: $color-white;
+
+
+  path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1900;
+    transition: stroke 0.4s ease-out, stroke-dashoffset 0.7s ease-out;
+  }
+}
+
+.intro_fingerprint-instruction-container {
+  position: relative;
+}
+
+.intro_fingerprint-instruction {
+  color: $color-white;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.5rem;
+
+  &--above {
+    display: inline-block;
+    position: absolute;
+    top: -5px;
+    left: -10px;
+    color: $color-black;
+    background: $color-white;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 5px 10px;
+    width: 0;
+  }
 }
