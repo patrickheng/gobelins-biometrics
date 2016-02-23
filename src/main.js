@@ -7,7 +7,9 @@ import domready from 'domready';
 import 'gsap';
 
 // Routes
-import HomepageComponent from 'containers/homepage';
+import IntroComponent from 'containers/intro';
+
+import MainComponent from 'containers/main';
 
 Vue.use(Router);
 
@@ -45,7 +47,12 @@ class Main {
 
       '*': {
         name: "home",
-        component: HomepageComponent
+        component: IntroComponent
+      },
+
+      '/experience': {
+        name: "experience",
+        component: MainComponent
       }
     });
 
