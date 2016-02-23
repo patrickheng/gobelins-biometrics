@@ -52,6 +52,13 @@ export default {
       {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract('style', 'css!autoprefixer?browsers=last 2 version!sass')
+      },
+      { test: /\.(glsl|frag|vert)$/, loader: 'raw!glslify', exclude: /node_modules/ }
+    ],
+    postLoaders: [
+      {
+        test: /\.js$/,
+        loader: 'ify'
       }
     ]
   },

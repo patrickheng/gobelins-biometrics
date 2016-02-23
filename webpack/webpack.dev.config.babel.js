@@ -61,6 +61,13 @@ export default {
       {
         test: /\.scss$/,
         loaders: ['style', 'css', 'sass']
+      },
+      { test: /\.(glsl|frag|vert)$/, loader: 'raw!glslify', exclude: /node_modules/ }
+    ],
+    postLoaders: [
+      {
+        test: /\.js$/,
+        loader: 'ify'
       }
     ]
   },
