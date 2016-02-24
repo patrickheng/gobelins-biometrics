@@ -43,7 +43,7 @@ export default Vue.extend({
 
       Emitter.on(WINDOW_RESIZE, this.onWindowResize);
 
-      this.$on(SIDEBAR_TOGGLE, this.onSidebarToggle);
+      Emitter.on(SIDEBAR_TOGGLE, this.onSidebarToggle);
 
       document.addEventListener('keyup', ::this.onKeyUp, false);
 
@@ -51,9 +51,9 @@ export default Vue.extend({
 
     removeEventListeners() {
 
-      this.$off(WINDOW_RESIZE, this.onWindowResize);
+      Emitter.off(WINDOW_RESIZE, this.onWindowResize);
 
-      this.$off(SIDEBAR_TOGGLE, this.onSidebarToggle);
+      Emitter.off(SIDEBAR_TOGGLE, this.onSidebarToggle);
 
       document.removeEventListener('keyup', ::this.onKeyUp, false);
 
@@ -94,9 +94,6 @@ export default Vue.extend({
       this.showTl = new TimelineMax({paused: true});
 
       this.hideTl = new TimelineMax({paused: true});
-
-      // this.showTl.to(this.$el, 2, {x: '100%'}, {x: '0%', ease: Expo.easeOut});
-      // this.hideTl.to(this.$el, 2, {x: '0%'}, {x: '100%', ease: Expo.easeOut});
     }
 
   },

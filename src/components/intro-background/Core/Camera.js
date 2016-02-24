@@ -24,7 +24,7 @@ class Camera extends THREE.PerspectiveCamera {
       this.controls = new OrbitControls( this, Container.get('Configuration').get('canvas') );
     }
 
-    this.bindEvents();
+    this.addEventListeners();
 
     TweenMax.from(this.position, 10, {x: 0, y: -100, z: 0 , ease: Expo.easeOut});
   }
@@ -33,16 +33,15 @@ class Camera extends THREE.PerspectiveCamera {
    * BindEvents function
    * @return {void}
    */
-  bindEvents() {
-    document.addEventListener( 'resize', ::this.resize, false);
+  addEventListeners() {
   }
 
   /**
    * Resize function
    * @return {void}
    */
-  resize() {
-    this.aspect = window.innerWidth / window.innerHeight;
+  resize(width, height) {
+    this.aspect = width / height;
     this.updateProjectionMatrix();
   }
 }

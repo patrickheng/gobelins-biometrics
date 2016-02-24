@@ -16,7 +16,7 @@ class PostProcessing {
    * @param  {Configuration}  configuration  Configuration instance
    */
   constructor( effectComposer, scene, camera, renderer, gui, configuration ) {
-
+    console.log(effectComposer);
     this.scene = scene;
     this.camera = camera;
     this.renderer = renderer;

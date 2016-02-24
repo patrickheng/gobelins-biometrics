@@ -26,6 +26,7 @@ export default Vue.extend({
   ready() {
 
     this.scene = Container.get('Scene');
+    this.camera = Container.get('Camera');
     this.nodeGarden = Container.get('NodeGarden');
     this.scene.begin(this.$els.backgroundgl);
 
@@ -64,6 +65,9 @@ export default Vue.extend({
     onWindowResize(width, height) {
       this.$els.backgroundgl.style.width = width + 'px';
       this.$els.backgroundgl.style.height = height + 'px';
+
+      this.scene.resize(width,height);
+      this.camera.resize(width,height);
     },
 
     onMouseMove(ev) {

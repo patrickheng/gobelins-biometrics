@@ -1,4 +1,5 @@
 import { Composer } from '@superguigui/wagner';
+import Emitter from 'utils/Emitter';
 
 /**
  * EffectComposer class
@@ -12,11 +13,12 @@ class EffectComposer extends Composer {
    * @return {void}
    */
   constructor( renderer, configuration ) {
-    const effectComposer = configuration.get( 'effectComposer' );
+    const effectComposer = configuration.get( 'postProcessing.effectComposer' );
     super( renderer, effectComposer );
 
+
     // Resize listener
-    document.addEventListener( 'resize', ::this.resize, false );
+    Emitter.on( 'resize', this.resize );
   }
 
   /**
@@ -25,8 +27,8 @@ class EffectComposer extends Composer {
    * @param  {integer} height Height
    * @return {void}
    */
-  resize() {
-    this.setSize( window.innerWidth, window.innerHeight );
+  resize(width, height) {
+    this.setSize( width, height );
   }
 }
 

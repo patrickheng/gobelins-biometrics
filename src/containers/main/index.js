@@ -16,7 +16,6 @@ export default Vue.extend({
   data() {
 
     return {
-      _hidden: null
     };
   },
 
@@ -27,7 +26,11 @@ export default Vue.extend({
   ready() {
 
     this.addEventListeners();
+  },
 
+  beforeDestroy() {
+
+    this.removeEventListeners();
   },
 
   methods: {
@@ -40,7 +43,11 @@ export default Vue.extend({
     },
 
     addEventListeners() {
-      this.$on(WINDOW_RESIZE, this.onWindowResize);
+      Emitter.on(WINDOW_RESIZE, this.onWindowResize);
+    },
+
+    removeEventListeners() {
+      Emitter.off(WINDOW_RESIZE, this.onWindowResize);
     },
 
     onWindowResize(width, height) {
@@ -48,7 +55,7 @@ export default Vue.extend({
     },
 
     toggleSideBar() {
-      this.$broadcast(SIDEBAR_TOGGLE);
+      Emitter.emit(SIDEBAR_TOGGLE);
     }
 
   },
