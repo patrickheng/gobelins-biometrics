@@ -1,7 +1,5 @@
 import raf from 'raf';
 import Container from 'Container';
-
-
 /**
  * Scene class
  */
@@ -54,6 +52,9 @@ class Scene extends THREE.Scene {
 
     this.nodeGarden = Container.get( 'NodeGarden' );
     this.add(this.nodeGarden);
+
+    this.head = Container.get( 'Head' );
+    this.add(this.head);
 
     this.animate();
 

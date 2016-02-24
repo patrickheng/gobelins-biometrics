@@ -2,6 +2,7 @@ import Configuration from '../utils/Configuration';
 import Scene from '../components/webgl-experience/Core/Scene';
 import Camera from '../components/webgl-experience/Core/Camera';
 import NodeGarden from '../components/webgl-experience/NodeGarden';
+import Head from '../components/webgl-experience/Head';
 import Renderer from '../components/webgl-experience/Core/Renderer';
 import PostProcessing from '../components/webgl-experience/PostProcessing/PostProcessing';
 import EffectComposer from '../components/webgl-experience/PostProcessing/EffectComposer';
@@ -59,5 +60,10 @@ export default [
     type: 'service',
     name: 'NodeGarden',
     constructor: NodeGarden
+  },
+  {
+    type: 'service',
+    name: 'Head',
+    constructor: Head
   }
 ];
