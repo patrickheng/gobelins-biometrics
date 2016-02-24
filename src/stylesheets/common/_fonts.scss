@@ -1,1 +1,36 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto+Mono:400,700);
+@font-face {
+  font-family: 'Circular';
+  src: url('/fonts/CircularStd-Bold.eot'); /* IE9 Compat Modes */
+  src: url('/fonts/CircularStd-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/fonts/CircularStd-Bold.woff') format('woff'), /* Modern Browsers */
+       url('/fonts/CircularStd-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('/fonts/CircularStd-Bold.svg#b333381778fc1f96de44d359c7f8b95e') format('svg'); /* Legacy iOS */
+
+  font-style:   normal;
+  font-weight:  700;
+}
+
+@font-face {
+  font-family: 'Circular';
+  src: url('/fonts/CircularStd-Book.eot'); /* IE9 Compat Modes */
+  src: url('/fonts/CircularStd-Book.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/fonts/CircularStd-Book.woff') format('woff'), /* Modern Browsers */
+       url('/fonts/CircularStd-Book.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('/fonts/CircularStd-Book.svg#dd452d63ae05ddb466f19713a7d09fd5') format('svg'); /* Legacy iOS */
+
+  font-style:   normal;
+  font-weight:  400;
+}
+
+@font-face {
+  font-family: 'Circular';
+  src: url('/fonts/CircularStd-Medium.eot'); /* IE9 Compat Modes */
+  src: url('/fonts/CircularStd-Medium.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/fonts/CircularStd-Medium.woff') format('woff'), /* Modern Browsers */
+       url('/fonts/CircularStd-Medium.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('/fonts/CircularStd-Medium.svg#a81919819e5d11fb78ee7eadc8883b0d') format('svg'); /* Legacy iOS */
+
+  font-style:   normal;
+  font-weight:  400;
+}
+
