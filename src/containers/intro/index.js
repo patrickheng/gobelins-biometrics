@@ -60,8 +60,9 @@ export default Vue.extend({
     },
 
     createGSAPTimeline() {
-      TweenMax.from(this.$els.fingerprint, 5, {scale: 0, ease: Expo.easeOut});
-      TweenMax.from(this.$els.holdindicationunder, 10, {y: '100%', opacity: 0, ease: Expo.easeOut});
+      TweenMax.from(this.$els.title, 5, {opacity: 0, ease: Expo.easeOut});
+      TweenMax.from(this.$els.fingerprint, 5, {opacity: 0, scale: 0, ease: Back.easeOut, delay: 3});
+      TweenMax.from(this.$els.holdindicationunder, 5, {y: '100%', opacity: 0, ease: Expo.easeOut, delay: 3});
 
       this.fingerprintTl = new TimelineMax({paused: true, onComplete: this.holdClickComplete});
       this.fingerprintTl

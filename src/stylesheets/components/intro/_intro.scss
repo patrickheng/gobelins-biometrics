@@ -1,3 +1,4 @@
+// General
 .intro_wrapper,
 .intro_container {
   position: relative;
@@ -15,10 +16,24 @@
   left: 0;
   z-index: -1;
 }
+
+.intro_title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: $color-white;
+  transform: translate(-50%, -50%);
+  letter-spacing: 0.5rem;
+}
+
+// Fingerprint container
 .intro_fingerprint-container {
   position: absolute;
   left: 50%;
-  bottom: 3rem;
+  bottom: 10rem;
   cursor: pointer;
   text-align: center;
   transform: translate3d(-50%, 0, 0);

@@ -14,7 +14,7 @@ class NodeGarden extends THREE.Object3D {
 
     this.showDots = true;
     this.showLines = true;
-    this.minDistance = 100;
+    this.minDistance = 50;
     this.limitConnections = false;
     this.maxConnections = 50;
     this.maxParticleCount = 50;
