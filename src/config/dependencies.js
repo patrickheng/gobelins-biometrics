@@ -1,12 +1,12 @@
 import Configuration from '../utils/Configuration';
-import Scene from '../components/intro-background/Core/Scene';
-import Camera from '../components/intro-background/Core/Camera';
-import NodeGarden from '../components/intro-background/NodeGarden';
-import Renderer from '../components/intro-background/Core/Renderer';
-import PostProcessing from '../components/intro-background/PostProcessing/PostProcessing';
-import EffectComposer from '../components/intro-background/PostProcessing/EffectComposer';
-import Clock from '../components/intro-background/Utils/Clock';
-import GUI from '../components/intro-background/Utils/GUI';
+import Scene from '../components/webgl-experience/Core/Scene';
+import Camera from '../components/webgl-experience/Core/Camera';
+import NodeGarden from '../components/webgl-experience/NodeGarden';
+import Renderer from '../components/webgl-experience/Core/Renderer';
+import PostProcessing from '../components/webgl-experience/PostProcessing/PostProcessing';
+import EffectComposer from '../components/webgl-experience/PostProcessing/EffectComposer';
+import Clock from '../components/webgl-experience/Utils/Clock';
+import GUI from '../components/webgl-experience/Utils/GUI';
 
 export default [
   // --- Core

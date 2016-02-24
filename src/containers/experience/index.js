@@ -5,7 +5,9 @@ import {
 	SIDEBAR_TOGGLE
 } from '../../config/messages';
 
-import infoSectionComponent from 'components/info-section';
+import InfoSectionComponent from 'components/info-section';
+
+import WebglExperienceComponent from 'components/webgl-experience';
 
 import 'gsap';
 
@@ -57,6 +59,7 @@ export default Vue.extend({
   },
 
   components: {
-    infoSectionComponent
+    InfoSectionComponent,
+    WebglExperienceComponent
   }
 });

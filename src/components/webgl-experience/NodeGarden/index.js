@@ -19,7 +19,7 @@ class NodeGarden extends THREE.Object3D {
     this.maxConnections = 50;
     this.maxParticleCount = 50;
     this.particleCount = 20;
-    this.radius = 200;
+    this.radius = 400;
     this.radiusHalf = this.radius / 2;
 
     this.segments = this.maxParticleCount * this.maxParticleCount;

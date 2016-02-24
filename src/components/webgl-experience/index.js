@@ -27,7 +27,7 @@ export default Vue.extend({
     this.camera = Container.get('Camera');
     this.renderer = Container.get('Renderer');
     this.nodeGarden = Container.get('NodeGarden');
-    this.scene.begin(this.$els.backgroundgl);
+    this.scene.begin(this.$els.canvascontainer);
 
     this.addEventListeners();
 
