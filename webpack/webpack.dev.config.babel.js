@@ -62,6 +62,10 @@ export default {
         test: /\.scss$/,
         loaders: ['style', 'css', 'sass']
       },
+      {
+        test: /\.(ttf|otf|eot|woff|woff2|svg)$/,
+        loader: 'url?limit=100000'
+      },
       { test: /\.(glsl|frag|vert)$/,
         loader: 'raw!glslify',
         exclude: /node_modules/
