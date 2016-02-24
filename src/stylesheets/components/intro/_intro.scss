@@ -10,13 +10,33 @@
   font-family: $font-stack;
 }
 
+.intro_background-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
 .intro_background {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: -1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 110%;
+  opacity: 0.7;
+
+  circle {
+    transform-origin: center;
+
+    animation: rotation 16s infinite;
+
+  }
+
+  path {
+    transform-origin: center;
+    animation: reverseRotation 10s ease infinite;
+  }
 }
 
 .intro_title {
@@ -91,5 +111,23 @@
     white-space: nowrap;
     padding: 5px 10px;
     width: 0;
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: none;
+  }
+  to {
+    transform: rotate(360deg);
+    stroke-dashoffset: 1800;
+  }
+}
+@keyframes reverseRotation {
+  from {
+    transform: none;
+  }
+  to {
+    transform: rotate(-360deg);
   }
 }

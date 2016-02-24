@@ -79,6 +79,7 @@ export default Vue.extend({
 
       this.enterTl
         .staggerFrom(this.titleSplited.chars, speed, {opacity: 0, scale: 0.7, ease: Expo.easeOut}, interSpeed)
+        .from(this.$els.backgroundcontainer, 5, {opacity: 0, scale: 0.5, ease: Expo.easeOut}, 1)
         .from(this.$els.fingerprint, 5, {opacity: 0, scale: 0, ease: Back.easeOut}, 1)
         .from(this.$els.holdindicationunder, 5, {y: 30, opacity: 0, ease: Expo.easeOut}, 1)
         .from(this.$els.holdindication, 5, {y: 30, opacity: 0, ease: Expo.easeOut}, 1);
@@ -94,11 +95,13 @@ export default Vue.extend({
         .fromTo(this.$els.fingerprint, 3, {scale: 1}, {scale: 1.2, ease: RoughEase.ease}, 0)
         .fromTo(this.$els.holdindication, 1, {opacity: 0}, {opacity: 1, ease: RoughEase.ease}, 0)
         .fromTo(this.$els.holdindication, 4, {width: 0 }, {width: 155, ease: Expo.easeOut}, 0)
-        .fromTo(this.$els.holdindication, 1, {opacity: 0}, {opacity: 1, ease: RoughEase.ease}, 2);
+        .to(this.$els.backgroundcontainer, 5, {scale: 1.2, ease: Expo.easeOut}, 0)
+        .fromTo(this.$els.holdindication, 1, {opacity: 0}, {opacity: 1, ease: RoughEase.ease}, 2)
 
       this.fingerprintTlDuration = this.fingerprintTl.duration();
 
       this.leaveTl
+        .to(this.$els.backgroundcontainer, 1, {opacity: 0, ease: Expo.easeOut}, 0)
         .to(this.$els.fingerprint, 1, {scale: 0, ease: Back.easeOut})
         .to(this.$els.holdindication, 1, {opacity: 0, y: 50, ease: Expo.easeOut}, 0)
         .to(this.$els.holdindicationunder, 1, {opacity: 0, y: 50, ease: Expo.easeOut}, 0)
