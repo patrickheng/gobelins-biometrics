@@ -8,6 +8,8 @@ import 'gsap';
 
 import introBackgroundComponent from 'components/intro-background';
 
+// import '../../directives/text-mask-animation';
+
 export default Vue.extend({
 
   template: require('./template.html'),

@@ -62,7 +62,14 @@ export default {
         test: /\.scss$/,
         loaders: ['style', 'css', 'sass']
       },
-      { test: /\.(glsl|frag|vert)$/, loader: 'raw!glslify', exclude: /node_modules/ }
+      { test: /\.(glsl|frag|vert)$/,
+        loader: 'raw!glslify',
+        exclude: /node_modules/
+      },
+      {
+        test: /splitText\.js$/,
+        loader: 'imports?define=>false!exports?SplitText'
+      }
     ],
     postLoaders: [
       {
@@ -85,6 +92,7 @@ export default {
       '__PROD__': JSON.stringify(false)
     }),
     new webpack.ProvidePlugin({
+      'TweenMax': 'gsap',
       'THREE': 'three',
       'Vue': 'vue'
     }),
