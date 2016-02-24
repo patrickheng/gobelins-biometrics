@@ -1,5 +1,7 @@
 'use strict';
 
+import Router from 'router';
+
 import 'gsap';
 
 import {
@@ -74,19 +76,30 @@ export default Vue.extend({
     createAnimationTimeline() {
 
       this.fingerprintTl = new TimelineMax({paused: true, onComplete: this.holdClickComplete});
+      this.leaveTl = new TimelineMax({paused: true, onComplete: this.goToExperiencePage});
 
       this.fingerprintTl
         .fromTo(this.$els.fingerprint, 3, {scale: 1}, {scale: 1.2, ease: RoughEase.ease}, 0)
         .fromTo(this.$els.holdindication, 1, {opacity: 0}, {opacity: 1, ease: RoughEase.ease}, 0)
-        .fromTo(this.$els.holdindication, 5, {width: 0 }, {width: 155, ease: Expo.easeOut}, 0)
-        .fromTo(this.$els.holdindication, 2, {opacity: 0}, {opacity: 1, ease: RoughEase.ease}, 3);
+        .fromTo(this.$els.holdindication, 4, {width: 0 }, {width: 155, ease: Expo.easeOut}, 0)
+        .fromTo(this.$els.holdindication, 1, {opacity: 0}, {opacity: 1, ease: RoughEase.ease}, 2);
 
       this.fingerprintTlDuration = this.fingerprintTl.duration();
-      
+
+      this.leaveTl
+        .to(this.$els.fingerprint, 1, {scale: 0, ease: Back.easeOut})
+        .to(this.$els.holdindication, 1, {opacity: 0, y: 50, ease: Expo.easeOut}, 0)
+        .to(this.$els.holdindicationunder, 1, {opacity: 0, y: 50, ease: Expo.easeOut}, 0)
+        .to(this.$els.title, 1, {opacity: 0, y: -200, ease: Expo.easeOut}, 0);
+
     },
 
     holdClickComplete() {
+      this.leaveTl.play();
+    },
 
+    goToExperiencePage() {
+      Router.go({name: 'experience'});
     },
 
     onWindowResize(width, height) {

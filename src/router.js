@@ -4,6 +4,8 @@ import IntroComponent from 'containers/intro';
 
 import MainComponent from 'containers/main';
 
+import 'gsap';
+
 Vue.use(VueRouter);
 
 class Router extends VueRouter {
@@ -18,8 +20,6 @@ class Router extends VueRouter {
       saveScrollPosition: false,
       transitionOnLoad: false
     });
-
-    this.router = null;
 
     this.firstRoot = true;
 
