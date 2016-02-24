@@ -2,8 +2,6 @@
 
 import debounce from 'lodash.debounce';
 
-import Emitter from 'utils/Emitter';
-
 import {
   WINDOW_RESIZE
 } from 'config/messages';
@@ -49,7 +47,7 @@ export default Vue.extend({
      */
     broadcastWindowSize() {
 
-      Emitter.emit(WINDOW_RESIZE, window.innerWidth, window.innerHeight);
+      this.$root.$broadcast(WINDOW_RESIZE, window.innerWidth, window.innerHeight);
     }
   },
 

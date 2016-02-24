@@ -5,8 +5,6 @@ import {
 	SIDEBAR_TOGGLE
 } from '../../config/messages';
 
-import Emitter from 'utils/Emitter';
-
 export default Vue.extend({
 
   template: require('./template.html'),
@@ -41,7 +39,7 @@ export default Vue.extend({
 
     addEventListeners() {
 
-      Emitter.on(WINDOW_RESIZE, this.onWindowResize);
+      this.$on(WINDOW_RESIZE, this.onWindowResize);
 
       this.$on(SIDEBAR_TOGGLE, this.onSidebarToggle);
 

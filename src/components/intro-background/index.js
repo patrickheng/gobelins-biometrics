@@ -2,8 +2,6 @@
 
 import Container from 'Container';
 
-import Emitter from 'utils/Emitter';
-
 import {
 	WINDOW_RESIZE
 } from '../../config/messages';
@@ -26,6 +24,8 @@ export default Vue.extend({
   ready() {
 
     this.scene = Container.get('Scene');
+    this.camera = Container.get('Camera');
+    this.renderer = Container.get('Renderer');
     this.nodeGarden = Container.get('NodeGarden');
     this.scene.begin(this.$els.backgroundgl);
 
@@ -49,21 +49,25 @@ export default Vue.extend({
 
     addEventListeners() {
 
-      Emitter.on(WINDOW_RESIZE, ::this.onWindowResize);
+      this.$on(WINDOW_RESIZE, ::this.onWindowResize);
 
       document.addEventListener('mousemove', ::this.onMouseMove, false);
     },
 
     removeEventListeners() {
 
-      Emitter.off(WINDOW_RESIZE, ::this.onWindowResize);
+      this.$off(WINDOW_RESIZE, ::this.onWindowResize);
 
       document.removeEventListener('mousemove', ::this.onMouseMove, false);
     },
 
     onWindowResize(width, height) {
+      console.log(width, height);
       this.$els.backgroundgl.style.width = width + 'px';
       this.$els.backgroundgl.style.height = height + 'px';
+
+      this.camera.resize(width, height);
+      this.renderer.resize(width, height);
     },
 
     onMouseMove(ev) {

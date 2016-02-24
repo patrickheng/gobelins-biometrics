@@ -41,8 +41,8 @@ class Camera extends THREE.PerspectiveCamera {
    * Resize function
    * @return {void}
    */
-  resize() {
-    this.aspect = window.innerWidth / window.innerHeight;
+  resize(width, height) {
+    this.aspect = width / height;
     this.updateProjectionMatrix();
   }
 }

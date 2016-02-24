@@ -35,7 +35,6 @@
     "@superguigui/wagner": "^0.1.15",
     "babel-runtime": "^6.5.0",
     "bottlejs": "^1.2.2",
-    "component-emitter": "^1.2.0",
     "dat-gui": "^0.5.0",
     "dom-events": "^0.1.1",
     "domready": "^1.0.8",

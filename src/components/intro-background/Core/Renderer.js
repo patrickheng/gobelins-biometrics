@@ -20,7 +20,7 @@ class Renderer extends THREE.WebGLRenderer {
     this.gammaInput = true;
     this.gammaOutput = true;
 
-    document.addEventListener('resize', ::this.resize, false);
+    // document.addEventListener('resize', ::this.resize, false);
   }
 
   /**
@@ -29,9 +29,9 @@ class Renderer extends THREE.WebGLRenderer {
    * @param  {integer} height Height
    * @return {void}
    */
-  resize() {
+  resize(width, height) {
 
-    this.setSize( window.innerWidth, window.innerHeight );
+    this.setSize( width, height );
   }
 }
 

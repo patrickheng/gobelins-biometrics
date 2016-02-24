@@ -1,4 +1,3 @@
-import Emitter from 'component-emitter';
 import Configuration from '../utils/Configuration';
 import Scene from '../components/intro-background/Core/Scene';
 import Camera from '../components/intro-background/Core/Camera';
@@ -15,11 +14,6 @@ export default [
     type: 'service',
     name: 'Configuration',
     constructor: Configuration
-  },
-  {
-    type: 'service',
-    name: 'Emitter',
-    constructor: Emitter
   },
 
   // --- ThreeJs Core
