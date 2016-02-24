@@ -20,13 +20,10 @@ class Camera extends THREE.PerspectiveCamera {
     this.lookAt(target);
 
     if( orbitControls ) {
-      console.log('orbit control');
       this.controls = new OrbitControls( this, Container.get('Configuration').get('canvas') );
     }
 
     this.bindEvents();
-
-    TweenMax.from(this.position, 10, {x: 0, y: -100, z: 0 , ease: Expo.easeOut});
   }
 
   /**

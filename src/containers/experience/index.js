@@ -46,7 +46,7 @@ export default Vue.extend({
     },
 
     onWindowResize(width, height) {
-
+      this.$broadcast(WINDOW_RESIZE, width, height);
     },
 
     toggleSideBar() {

@@ -80,7 +80,8 @@ export default Vue.extend({
       this.enterTl
         .staggerFrom(this.titleSplited.chars, speed, {opacity: 0, scale: 0.7, ease: Expo.easeOut}, interSpeed)
         .from(this.$els.fingerprint, 5, {opacity: 0, scale: 0, ease: Back.easeOut}, 1)
-        .from(this.$els.holdindicationunder, 5, {y: '100%', opacity: 0, ease: Expo.easeOut}, 1);
+        .from(this.$els.holdindicationunder, 5, {y: 30, opacity: 0, ease: Expo.easeOut}, 1)
+        .from(this.$els.holdindication, 5, {y: 30, opacity: 0, ease: Expo.easeOut}, 1);
 
     },
 

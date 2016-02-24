@@ -27,6 +27,8 @@ class Head extends THREE.Object3D {
 
       this.mesh = object;
 
+      this.mesh.scale.set( 4, 4, 4 );
+
       this.add(this.mesh);
 
     }, this.onLoadProgress, this.onLoadError);

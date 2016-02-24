@@ -63,8 +63,8 @@ export default Vue.extend({
 
     onWindowResize(width, height) {
       console.log(width, height);
-      this.$els.backgroundgl.style.width = width + 'px';
-      this.$els.backgroundgl.style.height = height + 'px';
+      this.$els.canvascontainer.style.width = width + 'px';
+      this.$els.canvascontainer.style.height = height + 'px';
 
       this.camera.resize(width, height);
       this.renderer.resize(width, height);
