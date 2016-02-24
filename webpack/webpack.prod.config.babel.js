@@ -57,7 +57,11 @@ export default {
         test: /\.(ttf|otf|eot|woff|woff2|svg)$/,
         loader: 'file?name=[path][hash].[ext]'
       },
-      { test: /\.(glsl|frag|vert)$/, loader: 'raw!glslify', exclude: /node_modules/ }
+      { test: /\.(glsl|frag|vert)$/, loader: 'raw!glslify', exclude: /node_modules/ },
+      {
+        test: /splitText\.js$/,
+        loader: 'imports?define=>false!exports?SplitText'
+      }
     ],
     postLoaders: [
       {

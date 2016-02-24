@@ -28,13 +28,16 @@
   color: $color-white;
   transform: translate(-50%, -50%);
   letter-spacing: 0.5rem;
+  span {
+    display: block;
+  }
 }
 
 // Fingerprint container
 .intro_fingerprint-container {
   position: absolute;
   left: 50%;
-  bottom: 10rem;
+  bottom: 10%;
   cursor: pointer;
   text-align: center;
   transform: translate3d(-50%, 0, 0);

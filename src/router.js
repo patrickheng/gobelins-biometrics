@@ -2,7 +2,7 @@ import VueRouter from 'vue-router';
 
 import IntroComponent from 'containers/intro';
 
-import MainComponent from 'containers/main';
+import ExperienceComponent from 'containers/experience';
 
 import 'gsap';
 
@@ -36,7 +36,7 @@ class Router extends VueRouter {
 
       '/experience': {
         name: "experience",
-        component: MainComponent
+        component: ExperienceComponent
       }
     });
 

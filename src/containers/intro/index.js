@@ -4,6 +4,8 @@ import Router from 'router';
 
 import 'gsap';
 
+import SplitText from '../../vendors/splitText.js';
+
 import {
 	WINDOW_RESIZE
 } from '../../config/messages';
@@ -66,10 +68,19 @@ export default Vue.extend({
     },
 
     launchEnterAnimation() {
+      this.enterTl = new TimelineMax();
 
-      TweenMax.from(this.$els.title, 5, {opacity: 0, ease: Expo.easeOut});
-      TweenMax.from(this.$els.fingerprint, 5, {opacity: 0, scale: 0, ease: Back.easeOut, delay: 0.2});
-      TweenMax.from(this.$els.holdindicationunder, 5, {y: '100%', opacity: 0, ease: Expo.easeOut, delay: 0.2});
+      this.titleSplited = new SplitText(this.$els.title, {
+        type: 'chars'
+      });
+
+      const speed = 2;
+      const interSpeed = speed / this.titleSplited.chars.length;
+
+      this.enterTl
+        .staggerFrom(this.titleSplited.chars, speed, {opacity: 0, scale: 0.7, ease: Expo.easeOut}, interSpeed)
+        .from(this.$els.fingerprint, 5, {opacity: 0, scale: 0, ease: Back.easeOut}, 1)
+        .from(this.$els.holdindicationunder, 5, {y: '100%', opacity: 0, ease: Expo.easeOut}, 1);
 
     },
 
