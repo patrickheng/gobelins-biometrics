@@ -13,7 +13,6 @@ class EffectComposer extends Composer {
    */
   constructor( renderer, configuration ) {
     const effectComposer = configuration.get( 'effectComposer' );
-
     super( renderer, effectComposer );
 
     // Resize listener

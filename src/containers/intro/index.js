@@ -1,10 +1,13 @@
 'use strict';
 
+import 'gsap';
+
+import Emitter from 'utils/Emitter';
+
 import {
 	WINDOW_RESIZE
 } from '../../config/messages';
 
-import 'gsap';
 
 import introBackgroundComponent from 'components/intro-background';
 
@@ -50,13 +53,13 @@ export default Vue.extend({
     },
 
     addEventListeners() {
-      this.$on(WINDOW_RESIZE, this.onWindowResize);
+      Emitter.on(WINDOW_RESIZE, this.onWindowResize);
       document.addEventListener('mouseup', this.onMouseUp, false);
       document.addEventListener('mousedown', this.onMouseDown, false);
     },
 
     removeEventListeners() {
-      this.$off(WINDOW_RESIZE, this.onWindowResize);
+      Emitter.off(WINDOW_RESIZE, this.onWindowResize);
       document.removeEventListener('mouseup', this.onMouseUp, false);
       document.removeEventListener('mousedown', this.onMouseDown, false);
     },

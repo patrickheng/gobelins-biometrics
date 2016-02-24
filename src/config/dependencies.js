@@ -1,3 +1,4 @@
+import Emitter from 'component-emitter';
 import Configuration from '../utils/Configuration';
 import Scene from '../components/intro-background/Core/Scene';
 import Camera from '../components/intro-background/Core/Camera';
@@ -8,13 +9,17 @@ import EffectComposer from '../components/intro-background/PostProcessing/Effect
 import Clock from '../components/intro-background/Utils/Clock';
 import GUI from '../components/intro-background/Utils/GUI';
 
-
 export default [
   // --- Core
   {
     type: 'service',
     name: 'Configuration',
     constructor: Configuration
+  },
+  {
+    type: 'service',
+    name: 'Emitter',
+    constructor: Emitter
   },
 
   // --- ThreeJs Core

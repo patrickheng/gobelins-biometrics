@@ -1,7 +1,8 @@
 'use strict';
 
-import THREE from 'three';
 import Container from 'Container';
+
+import Emitter from 'utils/Emitter';
 
 import {
 	WINDOW_RESIZE
@@ -33,6 +34,10 @@ export default Vue.extend({
     this.generateGSAPTimeline();
   },
 
+  beforeDestroy() {
+    this.removeEventListeners();
+  },
+
   methods: {
 
     /*
@@ -44,20 +49,21 @@ export default Vue.extend({
 
     addEventListeners() {
 
-      this.$on(WINDOW_RESIZE, this.onWindowResize);
+      Emitter.on(WINDOW_RESIZE, ::this.onWindowResize);
 
       document.addEventListener('mousemove', ::this.onMouseMove, false);
     },
 
     removeEventListeners() {
 
-      this.$off(WINDOW_RESIZE, this.onWindowResize);
+      Emitter.off(WINDOW_RESIZE, ::this.onWindowResize);
 
       document.removeEventListener('mousemove', ::this.onMouseMove, false);
     },
 
     onWindowResize(width, height) {
-
+      this.$els.backgroundgl.style.width = width + 'px';
+      this.$els.backgroundgl.style.height = height + 'px';
     },
 
     onMouseMove(ev) {
