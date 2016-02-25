@@ -98,8 +98,8 @@ class NodeGarden extends THREE.Object3D {
   }
 
   onMouseMove(dx, dy) {
-    this.rotation.offset.x = dx / 100;
-    this.rotation.offset.y = dy / 100;
+    this.rotation.offset.x = dx / 70;
+    this.rotation.offset.y = dy / 70;
   }
 
   update() {

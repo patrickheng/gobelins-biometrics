@@ -2,7 +2,7 @@ import ObjLoader from '../Utils/ObjLoader';
 import Container from 'Container';
 
 /**
- * Head class
+ * Hand class
  */
 class Hand extends THREE.Object3D {
 
@@ -21,7 +21,11 @@ class Hand extends THREE.Object3D {
 
     this.gui = Container.get('GUI');
 
+    this.position.set(100, -230, 0);
+    this.rotation.y = 0.9;
+
     this.loadMesh();
+
   }
 
   loadMesh() {
@@ -32,13 +36,11 @@ class Hand extends THREE.Object3D {
 
       this.mesh.scale.set( 0.5, 0.5, 0.5 );
 
-      this.mesh.position.x = 230;
-      this.mesh.position.y = -130;
-      this.mesh.position.z = -130;
+      this.box = new THREE.Box3().setFromObject( this.mesh );
 
-      this.rotation.y = Math.PI / 2;
+      this.box.center( this.mesh.position );
 
-      this.add(this.mesh);
+      this.add( this.mesh );
 
       this.initGUI();
 
@@ -48,9 +50,10 @@ class Hand extends THREE.Object3D {
   initGUI() {
     const folder = this.gui.addFolder( 'Hand' );
 
-    folder.add(this.mesh.position, 'x');
-    folder.add(this.mesh.position, 'y');
-    folder.add(this.mesh.position, 'z');
+    folder.add(this.position, 'x');
+    folder.add(this.position, 'y');
+    folder.add(this.position, 'z');
+    folder.add(this.rotation, 'y').name('rotation y');
 
   }
 

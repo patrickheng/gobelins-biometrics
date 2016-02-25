@@ -103,8 +103,8 @@ export default Vue.extend({
       this.leaveTl
         .to(this.$els.backgroundcontainer, 1, {opacity: 0, ease: Expo.easeOut}, 0)
         .to(this.$els.fingerprint, 1, {scale: 0, ease: Back.easeOut})
-        .to(this.$els.holdindication, 1, {opacity: 0, y: 50, ease: Expo.easeOut}, 0)
-        .to(this.$els.holdindicationunder, 1, {opacity: 0, y: 50, ease: Expo.easeOut}, 0)
+        .to(this.$els.holdindication, 1, {opacity: 0, y: 80, ease: Expo.easeOut}, 0)
+        .to(this.$els.holdindicationunder, 1, {opacity: 0, y: 80, ease: Expo.easeOut}, 0)
         .to(this.$els.title, 1, {opacity: 0, y: -200, ease: Expo.easeOut}, 0);
 
     },

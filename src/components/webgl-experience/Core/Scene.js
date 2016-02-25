@@ -67,8 +67,9 @@ class Scene extends THREE.Scene {
     this.add( this.ambientLight );
 
     this.directionalLight = new THREE.DirectionalLight( parseInt(this.directionalConfig.color, 16) );
-    this.directionalLight.position.set( 0, -96, 170 );
+    this.directionalLight.position.set(this.directionalConfig.position.x, this.directionalConfig.position.y, this.directionalConfig.position.z);
     this.directionalLight.intensity = this.directionalConfig.intensity;
+    this.directionalLight.color = this.directionalConfig.color;
     this.add( this.directionalLight );
 
     this.nodeGarden = Container.get( 'NodeGarden' );
@@ -91,8 +92,9 @@ class Scene extends THREE.Scene {
 
     this.enterTl
       .from(this.head.rotation, 6, {y: 3, ease: Back.easeOut}, 0)
+      .from(this.hand.rotation, 6, {y: 3, ease: Back.easeOut}, 0)
       .from(this.camera.position, 8, {x: 0, y: 100, z: 100 , ease: Expo.easeOut}, 0)
-      .from(this.directionalLight.position, 4, {x: -500, y: -500, z: -500, ease: Expo.easeOut}, 3);
+      .from(this.directionalLight.position, 3, {x: -200, y: -200, z: -200, ease: Expo.easeOut}, 3);
   }
 
   initGUI() {
@@ -112,13 +114,13 @@ class Scene extends THREE.Scene {
 
     });
 
-    directionalFolder.add(this.directionalLight.position, 'x', -1000, 1000);
+    directionalFolder.add(this.directionalLight.position, 'x', -500, 500);
 
-    directionalFolder.add(this.directionalLight.position, 'y', -1000, 1000);
+    directionalFolder.add(this.directionalLight.position, 'y', -500, 500);
 
-    directionalFolder.add(this.directionalLight.position, 'z', -1000, 1000);
+    directionalFolder.add(this.directionalLight.position, 'z', -500, 500);
 
-    directionalFolder.add(this.directionalLight, 'intensity', 0, 0.3);
+    directionalFolder.add(this.directionalLight, 'intensity', 0, 0.5);
   }
 
   /**
@@ -137,6 +139,7 @@ class Scene extends THREE.Scene {
    * @return {void}
    */
   render() {
+    this.camera.update();
     this.nodeGarden.update();
     this.postProcessing.update();
   }
