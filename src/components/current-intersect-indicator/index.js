@@ -2,11 +2,10 @@
 
 import Emitter from 'utils/Emitter';
 
-import Container from 'Container';
-
 import {
   WEBGL_IS_INTERSECTING,
-  WEBGL_IS_NOT_INTERSECTING
+  WEBGL_IS_NOT_INTERSECTING,
+  WEBGL_CLICK_ON_OBJECT
 } from '../../config/messages';
 
 export default Vue.extend({
@@ -25,9 +24,9 @@ export default Vue.extend({
   },
 
   ready() {
-    this.addEventListeners();
-
     this.generateGSAPTimeline();
+
+    this.addEventListeners();
   },
 
   beforeDestroy() {
@@ -47,6 +46,7 @@ export default Vue.extend({
 
       Emitter.on(WEBGL_IS_INTERSECTING, ::this.onIsIntersecting);
       Emitter.on(WEBGL_IS_NOT_INTERSECTING, ::this.onIsNotIntersecting);
+      this.$on(WEBGL_CLICK_ON_OBJECT, ::this.onClickOnObject);
 
     },
 
@@ -54,6 +54,7 @@ export default Vue.extend({
 
       Emitter.off(WEBGL_IS_INTERSECTING, ::this.onIsIntersecting);
       Emitter.off(WEBGL_IS_NOT_INTERSECTING, ::this.onIsNotIntersecting);
+      this.$off(WEBGL_CLICK_ON_OBJECT, ::this.onClickOnObject);
 
     },
 
@@ -77,6 +78,12 @@ export default Vue.extend({
     },
 
     onIsNotIntersecting() {
+      this.enterTl.stop();
+      this.leaveTl.play(0);
+    },
+
+    onClickOnObject() {
+      this.enterTl.time(0);
       this.enterTl.stop();
       this.leaveTl.play(0);
     }

@@ -25,7 +25,7 @@
   cursor: pointer;
 
   .toggle-side-bar-transition & {
-    transition: opacity 1s ease(out-expo) 1s;
+    transition: opacity 1s ease(out-expo)s;
   }
   .toggle-side-bar-enter & {
     opacity: 0;

@@ -11,7 +11,9 @@ import 'gsap';
 import {
 	WEBGL_MESH_LOADED,
   WEBGL_IS_INTERSECTING,
-  WEBGL_IS_NOT_INTERSECTING
+  WEBGL_IS_NOT_INTERSECTING,
+  WEBGL_ENABLE_RAYCAST,
+  WEBGL_DISABLE_RAYCAST
 } from 'config/messages';
 
 /**
@@ -66,6 +68,7 @@ class Scene extends THREE.Scene {
     this.mouse = new THREE.Vector2();
     this.hotSpots = [];
 
+    this.raycastEnabled = true;
     this.wasIntersecting = false;
     this.isIntersecting = false;
 
@@ -74,6 +77,7 @@ class Scene extends THREE.Scene {
     this.meshesAreLoaded = false;
 
     this.addEventListeners();
+    this.removeEventListeners();
 
     this.createScene();
 
@@ -82,6 +86,14 @@ class Scene extends THREE.Scene {
 
   addEventListeners() {
     Emitter.on(WEBGL_MESH_LOADED, ::this.onMeshLoad);
+    Emitter.on(WEBGL_ENABLE_RAYCAST, ::this.onEnableRaycast);
+    Emitter.on(WEBGL_DISABLE_RAYCAST, ::this.onDisableRaycast);
+  }
+
+  removeEventListeners() {
+    Emitter.off(WEBGL_MESH_LOADED, ::this.onMeshLoad);
+    Emitter.off(WEBGL_ENABLE_RAYCAST, ::this.onEnableRaycast);
+    Emitter.off(WEBGL_DISABLE_RAYCAST, ::this.onDisableRaycast);
   }
 
   /**
@@ -133,6 +145,14 @@ class Scene extends THREE.Scene {
   onMouseMove(ev) {
     this.mouse.x = ( ev.clientX / window.innerWidth ) * 2 - 1;
     this.mouse.y = - ( ev.clientY / window.innerHeight ) * 2 + 1;
+  }
+
+  onEnableRaycast() {
+    this.raycastEnabled = true;
+  }
+
+  onDisableRaycast() {
+    this.raycastEnabled = false;
   }
 
   onMeshLoad() {
@@ -194,32 +214,31 @@ class Scene extends THREE.Scene {
    */
   render() {
 
-    this.raycaster.setFromCamera( this.mouse, this.camera );
+    if(this.raycastEnabled) {
+      this.raycaster.setFromCamera( this.mouse, this.camera );
 
-    // calculate objects intersecting the picking ray
-    const intersects = this.raycaster.intersectObjects( this.hotSpots );
+      // calculate objects intersecting the picking ray
+      const intersects = this.raycaster.intersectObjects( this.hotSpots );
 
-    this.wasIntersecting = this.isIntersecting;
+      this.wasIntersecting = this.isIntersecting;
 
-    if(intersects.length > 0) {
+      if(intersects.length > 0) {
 
-      this.isIntersecting = true;
+        this.isIntersecting = true;
 
-      if(this.wasIntersecting !== this.isIntersecting) {
-        Emitter.emit(WEBGL_IS_INTERSECTING, intersects[0]);
+        if(this.wasIntersecting !== this.isIntersecting) {
+          Emitter.emit(WEBGL_IS_INTERSECTING, intersects[0]);
+        }
+
+      } else {
+
+        this.isIntersecting = false;
+
+        if(this.wasIntersecting !== this.isIntersecting) {
+          Emitter.emit(WEBGL_IS_NOT_INTERSECTING);
+        }
       }
-
-    } else {
-
-      this.isIntersecting = false;
-
-      if(this.wasIntersecting !== this.isIntersecting) {
-        Emitter.emit(WEBGL_IS_NOT_INTERSECTING);
-      }
-
     }
-
-
 
     this.camera.update();
     this.nodeGarden.update();

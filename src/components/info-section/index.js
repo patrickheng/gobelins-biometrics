@@ -1,7 +1,11 @@
 'use strict';
 
+import Emitter from 'utils/Emitter';
+
 import {
 	WINDOW_RESIZE,
+	WEBGL_ENABLE_RAYCAST,
+	WEBGL_DISABLE_RAYCAST,
   WEBGL_CLICK_ON_OBJECT
 } from '../../config/messages';
 
@@ -21,11 +25,11 @@ export default Vue.extend({
   },
 
   ready() {
-
     this.addEventListeners();
+  },
 
-    this.generateGSAPTimeline();
-
+  beforeDestroy() {
+    this.removeEventListeners();
   },
 
   methods: {
@@ -78,23 +82,12 @@ export default Vue.extend({
 
     showSidebar() {
       this.isDisplay = true;
-      this.hideTl.stop();
-      this.showTl.play(0);
+			Emitter.emit(WEBGL_DISABLE_RAYCAST);
     },
 
     closeSidebar() {
       this.isDisplay = false;
-      this.showTl.stop();
-      this.hideTl.play(0);
-    },
-
-    generateGSAPTimeline() {
-      this.showTl = new TimelineMax({paused: true});
-
-      this.hideTl = new TimelineMax({paused: true});
-
-      // this.showTl.to(this.$el, 2, {x: '100%'}, {x: '0%', ease: Expo.easeOut});
-      // this.hideTl.to(this.$el, 2, {x: '0%'}, {x: '100%', ease: Expo.easeOut});
+			Emitter.emit(WEBGL_ENABLE_RAYCAST);
     }
 
   },

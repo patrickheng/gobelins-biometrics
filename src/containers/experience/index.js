@@ -75,6 +75,7 @@ export default Vue.extend({
         console.log('click on ', this.currentObjectRef);
 
         this.$root.$broadcast(WEBGL_CLICK_ON_OBJECT, this.currentObjectRef);
+        this.isIntersecting = false;
       }
     },
 
