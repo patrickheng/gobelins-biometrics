@@ -2,6 +2,8 @@ import raf from 'raf';
 
 import Container from 'Container';
 
+import concat from 'lodash.concat';
+
 import 'gsap';
 
 /**
@@ -52,6 +54,14 @@ class Scene extends THREE.Scene {
 
     this.gui = Container.get( 'GUI' );
 
+    this.raycaster = new THREE.Raycaster();
+    this.mouse = new THREE.Vector2();
+    this.hotSpots = [];
+
+    this.meshCount = 0;
+    this.meshesNb = 2;
+    this.meshesAreLoaded = false;
+
     this.createScene();
 
     this.initGUI();
@@ -99,7 +109,26 @@ class Scene extends THREE.Scene {
 
     setTimeout(()=> {
       this.head.hotSpotDisplay();
+      this.hand.hotSpotDisplay();
     }, 3000);
+  }
+
+  onMouseMove(ev) {
+    this.mouse.x = ( ev.clientX / window.innerWidth ) * 2 - 1;
+	  this.mouse.y = - ( ev.clientY / window.innerHeight ) * 2 + 1;
+  }
+
+  onMeshLoad() {
+    this.meshCount++;
+
+    if(this.meshCount >= this.meshesNb) {
+
+      this.meshesAreLoaded = true;
+
+      this.hotSpots = concat(this.head.hotSpots, this.hand.hotSpots);
+
+    }
+
   }
 
   initGUI() {
@@ -144,6 +173,18 @@ class Scene extends THREE.Scene {
    * @return {void}
    */
   render() {
+
+    this.raycaster.setFromCamera( this.mouse, this.camera );
+
+    // calculate objects intersecting the picking ray
+    const intersects = this.raycaster.intersectObjects( this.hotSpots );
+
+    for ( let i = 0; i < intersects.length; i++ ) {
+
+    	console.log(intersects);
+
+    }
+
     this.camera.update();
     this.nodeGarden.update();
     this.postProcessing.update();
