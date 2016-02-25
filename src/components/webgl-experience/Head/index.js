@@ -1,5 +1,10 @@
 import ObjLoader from '../Utils/ObjLoader';
+
 import Container from 'Container';
+
+import HotSpot from '../HotSpot';
+
+import raf from 'raf';
 
 /**
  * Head class
@@ -19,14 +24,32 @@ class Head extends THREE.Object3D {
 
     this.loader = new THREE.OBJLoader(this.manager);
 
+    this.hotSpots = [];
+
     this.gui = Container.get('GUI');
 
-    this.position.set( -93, 5, -1);
+    this.clock = Container.get('Clock');
 
-    this.rotation.y = 0.6;
+    this.configuration = Container.get('Configuration');
+
+    this.meshConfiguration = this.configuration.get('meshes.head');
+
+    this.hotSpotsConfig = this.configuration.get('hotSpots.head');
+
+    this.hotSpots = [];
+
+    this.position.set( this.meshConfiguration.position.x, this.meshConfiguration.position.y, this.meshConfiguration.position.z );
+
+    this.rotation.y = this.meshConfiguration.rotation.y;
+
+    this.bind();
 
     this.loadMesh();
 
+  }
+
+  bind() {
+    this.update = this.update.bind(this);
   }
 
   loadMesh() {
@@ -35,7 +58,7 @@ class Head extends THREE.Object3D {
 
       this.mesh = object;
 
-      this.mesh.scale.set( 3.6, 3.6, 3.6 );
+      this.mesh.scale.set( this.meshConfiguration.scale.x, this.meshConfiguration.scale.y, this.meshConfiguration.scale.z );
 
       this.box = new THREE.Box3().setFromObject( this.mesh );
 
@@ -45,6 +68,10 @@ class Head extends THREE.Object3D {
 
       this.initGUI();
 
+      this.generateHotSpots();
+
+      this.update();
+
     }, this.onLoadProgress, this.onLoadError);
   }
 
@@ -53,8 +80,27 @@ class Head extends THREE.Object3D {
 
     folder.add(this.position, 'x');
     folder.add(this.position, 'y');
-    folder.add(this.position, 'z');
+    folder.add(this.position, 'z', -20, 2);
     folder.add(this.rotation, 'y').name('rotation y');
+
+  }
+
+  hotSpotDisplay() {
+    for (let i = 0; i < this.hotSpots.length; i++) {
+      setTimeout(()=> {
+        this.hotSpots[i].hotSpotDisplay();
+      }, 50)
+    }
+  }
+
+  generateHotSpots() {
+    for (let i = 0; i < this.hotSpotsConfig.length; i++) {
+      const hotSpot = new HotSpot(this.hotSpotsConfig[i]);
+
+      this.add(hotSpot);
+
+      this.hotSpots.push(hotSpot);
+    }
 
   }
 
@@ -63,6 +109,16 @@ class Head extends THREE.Object3D {
   }
 
   onLoadError() {
+  }
+
+  update() {
+    const time = this.clock.time;
+
+    for (let i = 0; i < this.hotSpots.length; i++) {
+      this.hotSpots[i].update(time);
+    }
+
+    raf(this.update);
   }
 }
 

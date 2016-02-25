@@ -88,13 +88,18 @@ class Scene extends THREE.Scene {
   }
 
   enterAnimation() {
-    this.enterTl = new TimelineMax();
+    this.enterTl = new TimelineMax({onComplete: ()=> {
+    }});
 
     this.enterTl
-      .from(this.head.rotation, 6, {y: 3, ease: Back.easeOut}, 0)
-      .from(this.hand.rotation, 6, {y: 3, ease: Back.easeOut}, 0)
+      .from(this.head.rotation, 7, {y: 3, ease: Back.easeOut}, 0)
+      .from(this.hand.rotation, 7, {y: 3, ease: Back.easeOut}, 0)
       .from(this.camera.position, 8, {x: 0, y: 100, z: 100 , ease: Expo.easeOut}, 0)
-      .from(this.directionalLight.position, 3, {x: -200, y: -200, z: -200, ease: Expo.easeOut}, 3);
+      .from(this.directionalLight.position, 5, {x: -200, y: -200, z: -200, ease: Expo.easeOut}, 1.5);
+
+    setTimeout(()=> {
+      this.head.hotSpotDisplay();
+    }, 3000);
   }
 
   initGUI() {

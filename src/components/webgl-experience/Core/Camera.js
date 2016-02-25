@@ -69,8 +69,6 @@ class Camera extends THREE.PerspectiveCamera {
 
     this.position.y = Clamp(-40, 50, this.position.y + ( -this.mouseY - this.position.y ) * .010);
 
-    console.log(this.position.x, this.position.y);
-
     this.lookAt(this.target);
   }
 }

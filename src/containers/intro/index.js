@@ -103,9 +103,9 @@ export default Vue.extend({
       this.leaveTl
         .to(this.$els.backgroundcontainer, 1, {opacity: 0, ease: Expo.easeOut}, 0)
         .to(this.$els.fingerprint, 1, {scale: 0, ease: Back.easeOut})
-        .to(this.$els.holdindication, 1, {opacity: 0, y: 80, ease: Expo.easeOut}, 0)
-        .to(this.$els.holdindicationunder, 1, {opacity: 0, y: 80, ease: Expo.easeOut}, 0)
-        .to(this.$els.title, 1, {opacity: 0, y: -200, ease: Expo.easeOut}, 0);
+        .to(this.$els.holdindication, 1, {opacity: 0, y: 200, ease: Expo.easeOut}, 0)
+        .to(this.$els.holdindicationunder, 1, {opacity: 0, y: 200, ease: Expo.easeOut}, 0)
+        .to(this.$els.title, 2, {opacity: 0, y: -500, ease: Expo.easeOut}, 0);
 
     },
 
@@ -118,7 +118,7 @@ export default Vue.extend({
     },
 
     onWindowResize(width, height) {
-      console.log('Window resize from application.', width, height);
+      console.log('Debounce : Window resize from application.', width, height);
     },
 
     onMouseDown() {
@@ -134,7 +134,6 @@ export default Vue.extend({
 
       this.fingerprintTl.pause();
       this.fingerprintTl.reverse();
-      console.log('mouseup');
     },
 
     onFingerprintMouseMove() {
