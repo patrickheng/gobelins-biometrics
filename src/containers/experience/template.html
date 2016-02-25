@@ -2,7 +2,6 @@
 
 	<div class="experience_container" v-on:click="onClick">
 
-
 		<h1>Main</h1>
 
 		<a v-link="{ name: 'intro' }">Back to intro</a>
@@ -10,6 +9,8 @@
 		<a v-on:click="toggleSideBar">Toggle sidebar</a>
 
 		<webgl-experience-component></webgl-experience-component>
+
+		<current-intersect-indicator-component></current-intersect-indicator-component>
 
 		<info-section-component></info-section-component>
 

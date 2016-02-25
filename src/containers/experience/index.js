@@ -14,6 +14,8 @@ import InfoSectionComponent from 'components/info-section';
 
 import WebglExperienceComponent from 'components/webgl-experience';
 
+import CurrentIntersectIndicatorComponent from 'components/current-intersect-indicator';
+
 import 'gsap';
 
 export default Vue.extend({
@@ -39,6 +41,10 @@ export default Vue.extend({
 
   },
 
+  beforeDestroy() {
+    this.removeEventListeners();
+  },
+
   methods: {
 
     /*
@@ -52,6 +58,12 @@ export default Vue.extend({
       Emitter.on(WEBGL_IS_INTERSECTING, this.onIsIntersecting);
       Emitter.on(WEBGL_IS_NOT_INTERSECTING, this.onIsNotIntersecting);
       this.$on(WINDOW_RESIZE, this.onWindowResize);
+    },
+
+    removeEventListeners() {
+      Emitter.off(WEBGL_IS_INTERSECTING, this.offIsIntersecting);
+      Emitter.off(WEBGL_IS_NOT_INTERSECTING, this.onIsNotIntersecting);
+      this.$off(WINDOW_RESIZE, this.onWindowResize);
     },
 
     onWindowResize(width, height) {
@@ -86,6 +98,7 @@ export default Vue.extend({
 
   components: {
     InfoSectionComponent,
-    WebglExperienceComponent
+    WebglExperienceComponent,
+    CurrentIntersectIndicatorComponent
   }
 });
