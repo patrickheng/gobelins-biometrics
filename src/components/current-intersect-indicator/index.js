@@ -46,7 +46,7 @@ export default Vue.extend({
 
       Emitter.on(WEBGL_IS_INTERSECTING, ::this.onIsIntersecting);
       Emitter.on(WEBGL_IS_NOT_INTERSECTING, ::this.onIsNotIntersecting);
-      this.$on(WEBGL_CLICK_ON_OBJECT, ::this.onClickOnObject);
+      Emitter.on(WEBGL_CLICK_ON_OBJECT, ::this.onClickOnObject);
 
     },
 
@@ -54,7 +54,7 @@ export default Vue.extend({
 
       Emitter.off(WEBGL_IS_INTERSECTING, ::this.onIsIntersecting);
       Emitter.off(WEBGL_IS_NOT_INTERSECTING, ::this.onIsNotIntersecting);
-      this.$off(WEBGL_CLICK_ON_OBJECT, ::this.onClickOnObject);
+      Emitter.off(WEBGL_CLICK_ON_OBJECT, ::this.onClickOnObject);
 
     },
 

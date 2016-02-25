@@ -45,7 +45,7 @@ export default Vue.extend({
 
       this.$on(WINDOW_RESIZE, this.onWindowResize);
 
-      this.$on(WEBGL_CLICK_ON_OBJECT, this.onClickOnObject);
+      Emitter.on(WEBGL_CLICK_ON_OBJECT, this.onClickOnObject);
 
       document.addEventListener('keyup', ::this.onKeyUp, false);
 
@@ -55,7 +55,7 @@ export default Vue.extend({
 
       this.$off(WINDOW_RESIZE, this.onWindowResize);
 
-      this.$off(WEBGL_CLICK_ON_OBJECT, this.onClickOnObject);
+      Emitter.off(WEBGL_CLICK_ON_OBJECT, this.onClickOnObject);
 
       document.removeEventListener('keyup', ::this.onKeyUp, false);
 

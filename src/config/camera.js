@@ -5,5 +5,10 @@ export default {
   far: 10000,
   position: new THREE.Vector3( 0, 10, 300 ),
   target: new THREE.Vector3( 0, 0, 0 ),
-  orbitControls: false
+  orbitControls: false,
+  movements: {
+    "oculaire" : {
+      position: new THREE.Vector3( 0, 0, 160 )
+    }
+  }
 };

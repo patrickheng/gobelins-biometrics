@@ -1,8 +1,8 @@
 export default {
   head : [
     {
-      name: "eyes",
-      ref: "eyes",
+      name: "Reconnaissance oculaire",
+      ref: "oculaire",
       position: new THREE.Vector3( 22, 8.7, 45 ),
       hex: 0xffffff,
       intensity: 2,

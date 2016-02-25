@@ -53,7 +53,7 @@ class HotSpot extends THREE.PointLight {
   hotSpotDisplay() {
     this.introTl = new TimelineMax({ onComplete: ()=> {
       this.introTlDone = true;
-    }})
+    }});
 
     this.introTl
       .to(this.mesh.scale, 2, { x: 1, y: 1, z: 1, ease: Back.easeOut})
@@ -67,7 +67,7 @@ class HotSpot extends THREE.PointLight {
       wireframe: true
     });
 
-    this.mesh = new THREE.Mesh(this.geom, this.mat)
+    this.mesh = new THREE.Mesh(this.geom, this.mat);
 
     this.mesh.name = this.name;
 
@@ -82,10 +82,10 @@ class HotSpot extends THREE.PointLight {
     const t = time * 2;
 
     if(this.introTlDone) {
-      this.scale.x += Math.sin(t) / 300;
-      this.scale.y += Math.sin(t) / 300;
-      this.scale.z += Math.sin(t) / 300;
-      this.distance += Math.sin(t * 2) / 100;
+      this.scale.x += Math.sin(t) / 250;
+      this.scale.y += Math.sin(t) / 250;
+      this.scale.z += Math.sin(t) / 250;
+      this.distance += Math.sin(t * 2) / 50;
     }
   }
 
