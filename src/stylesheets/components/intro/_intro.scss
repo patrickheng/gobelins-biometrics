@@ -7,7 +7,7 @@
   background: $color-black;
   color: $color-white;
   overflow: hidden;
-  font-family: $font-stack;
+  font-family: $font-circular;
 }
 
 .intro_background-container {
@@ -49,7 +49,7 @@
   color: $color-white;
   transform: translate(-50%, -50%);
   letter-spacing: 0.5rem;
-  font-family: $font-stack;
+  font-family: $font-circular;
   span {
     display: block;
   }
