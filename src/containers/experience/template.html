@@ -1,6 +1,6 @@
-<div class="page experience_wrapper">
+<div class="page experience_wrapper" :class="{ pointer: isIntersecting }">
 
-	<div class="experience_container">
+	<div class="experience_container" v-on:click="onClick">
 
 
 		<h1>Main</h1>

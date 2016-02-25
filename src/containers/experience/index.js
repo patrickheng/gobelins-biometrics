@@ -1,8 +1,13 @@
 'use strict';
 
+import Emitter from 'utils/Emitter';
+
 import {
 	WINDOW_RESIZE,
-	SIDEBAR_TOGGLE
+	SIDEBAR_TOGGLE,
+  WEBGL_IS_INTERSECTING,
+  WEBGL_IS_NOT_INTERSECTING,
+  WEBGL_CLICK_ON_OBJECT
 } from '../../config/messages';
 
 import InfoSectionComponent from 'components/info-section';
@@ -18,7 +23,7 @@ export default Vue.extend({
   data() {
 
     return {
-      _hidden: null
+      isIntersecting: false
     };
   },
 
@@ -27,6 +32,8 @@ export default Vue.extend({
   },
 
   ready() {
+
+    this.currentObjectRef = null;
 
     this.addEventListeners();
 
@@ -42,11 +49,30 @@ export default Vue.extend({
     },
 
     addEventListeners() {
+      Emitter.on(WEBGL_IS_INTERSECTING, this.onIsIntersecting);
+      Emitter.on(WEBGL_IS_NOT_INTERSECTING, this.onIsNotIntersecting);
       this.$on(WINDOW_RESIZE, this.onWindowResize);
     },
 
     onWindowResize(width, height) {
       this.$broadcast(WINDOW_RESIZE, width, height);
+    },
+
+    onClick() {
+      if(this.isIntersecting) {
+        console.log('click on ', this.currentObjectRef);
+
+        this.$root.$broadcast(WEBGL_CLICK_ON_OBJECT, this.currentObjectRef);
+      }
+    },
+
+    onIsIntersecting(intersectObject) {
+      this.currentObjectRef = intersectObject.object.ref;
+      this.isIntersecting = true;
+    },
+
+    onIsNotIntersecting() {
+      this.isIntersecting = false;
     },
 
     toggleSideBar() {

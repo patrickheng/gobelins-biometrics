@@ -2,9 +2,15 @@ import ObjLoader from '../Utils/ObjLoader';
 
 import Container from 'Container';
 
+import Emitter from 'utils/Emitter';
+
 import HotSpot from '../HotSpot';
 
 import raf from 'raf';
+
+import {
+	WEBGL_MESH_LOADED
+} from 'config/messages';
 
 /**
  * Hand class
@@ -72,6 +78,8 @@ class Hand extends THREE.Object3D {
 
       this.update();
 
+      Emitter.emit(WEBGL_MESH_LOADED);
+
     }, this.onLoadProgress, this.onLoadError);
   }
 
@@ -101,7 +109,6 @@ class Hand extends THREE.Object3D {
 
       this.hotSpots.push(hotSpot);
     }
-
   }
 
   onLoadProgress() {

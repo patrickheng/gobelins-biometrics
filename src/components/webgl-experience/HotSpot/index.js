@@ -13,11 +13,11 @@ class HotSpot extends THREE.PointLight {
    * Constructor function
    * @return {void}
    */
-  constructor( { name = "", position, hex = 0xffffff, intensity = 1, distance = 0, decay = 1 } ) {
+  constructor( { ref = "", position, hex = 0xffffff, intensity = 1, distance = 0, decay = 1 } ) {
 
     super( hex, intensity, distance, decay );
 
-    this.name = name;
+    this.ref = ref;
 
     this.hex = hex;
 
@@ -39,7 +39,7 @@ class HotSpot extends THREE.PointLight {
   }
 
   initGUI() {
-    const folder = this.gui.addFolder( 'Hotspot ' + this.name );
+    const folder = this.gui.addFolder( 'Hotspot ' + this.ref );
 
     folder.add(this.position, 'x');
     folder.add(this.position, 'y');
@@ -66,6 +66,8 @@ class HotSpot extends THREE.PointLight {
     });
 
     this.mesh = new THREE.Mesh(this.geom, this.mat)
+
+    this.mesh.ref = this.ref;
 
     this.add(this.mesh);
 

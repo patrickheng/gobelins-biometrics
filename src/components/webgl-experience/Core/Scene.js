@@ -2,9 +2,17 @@ import raf from 'raf';
 
 import Container from 'Container';
 
+import Emitter from 'utils/Emitter';
+
 import concat from 'lodash.concat';
 
 import 'gsap';
+
+import {
+	WEBGL_MESH_LOADED,
+  WEBGL_IS_INTERSECTING,
+  WEBGL_IS_NOT_INTERSECTING
+} from 'config/messages';
 
 /**
  * Scene class
@@ -58,13 +66,22 @@ class Scene extends THREE.Scene {
     this.mouse = new THREE.Vector2();
     this.hotSpots = [];
 
+    this.wasIntersecting = false;
+    this.isIntersecting = false;
+
     this.meshCount = 0;
-    this.meshesNb = 2;
+    this.meshNb = 2;
     this.meshesAreLoaded = false;
+
+    this.addEventListeners();
 
     this.createScene();
 
     this.initGUI();
+  }
+
+  addEventListeners() {
+    Emitter.on(WEBGL_MESH_LOADED, ::this.onMeshLoad);
   }
 
   /**
@@ -115,18 +132,21 @@ class Scene extends THREE.Scene {
 
   onMouseMove(ev) {
     this.mouse.x = ( ev.clientX / window.innerWidth ) * 2 - 1;
-	  this.mouse.y = - ( ev.clientY / window.innerHeight ) * 2 + 1;
+    this.mouse.y = - ( ev.clientY / window.innerHeight ) * 2 + 1;
   }
 
   onMeshLoad() {
     this.meshCount++;
 
-    if(this.meshCount >= this.meshesNb) {
+    if(this.meshCount >= this.meshNb) {
 
       this.meshesAreLoaded = true;
 
-      this.hotSpots = concat(this.head.hotSpots, this.hand.hotSpots);
+      const hotSpotsLight = concat(this.head.hotSpots, this.hand.hotSpots);
 
+      hotSpotsLight.map((hotSpot)=> {
+        this.hotSpots.push(hotSpot.mesh);
+      })
     }
 
   }
@@ -179,11 +199,27 @@ class Scene extends THREE.Scene {
     // calculate objects intersecting the picking ray
     const intersects = this.raycaster.intersectObjects( this.hotSpots );
 
-    for ( let i = 0; i < intersects.length; i++ ) {
+    this.wasIntersecting = this.isIntersecting;
 
-    	console.log(intersects);
+    if(intersects.length > 0) {
+
+      this.isIntersecting = true;
+
+      if(this.wasIntersecting !== this.isIntersecting) {
+        Emitter.emit(WEBGL_IS_INTERSECTING, intersects[0]);
+      }
+
+    } else {
+
+      this.isIntersecting = false;
+
+      if(this.wasIntersecting !== this.isIntersecting) {
+        Emitter.emit(WEBGL_IS_NOT_INTERSECTING);
+      }
 
     }
+
+
 
     this.camera.update();
     this.nodeGarden.update();

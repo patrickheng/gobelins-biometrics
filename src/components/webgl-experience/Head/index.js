@@ -2,9 +2,15 @@ import ObjLoader from '../Utils/ObjLoader';
 
 import Container from 'Container';
 
+import Emitter from 'utils/Emitter';
+
 import HotSpot from '../HotSpot';
 
 import raf from 'raf';
+
+import {
+	WEBGL_MESH_LOADED
+} from 'config/messages';
 
 /**
  * Head class
@@ -29,8 +35,6 @@ class Head extends THREE.Object3D {
     this.gui = Container.get('GUI');
 
     this.clock = Container.get('Clock');
-
-    this.scene = Container.get('Scene');
 
     this.configuration = Container.get('Configuration');
 
@@ -74,7 +78,7 @@ class Head extends THREE.Object3D {
 
       this.update();
 
-      this.scene.onMeshLoad();
+      Emitter.emit(WEBGL_MESH_LOADED);
 
     }, this.onLoadProgress, this.onLoadError);
   }
