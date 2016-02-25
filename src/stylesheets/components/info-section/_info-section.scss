@@ -2,22 +2,57 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 50%;
-  height: 100%;
-  background: $color-white;
+  bottom: 0;
+  left: 0;
+
+  transition: opacity 1.3s ease(out-expo) 1s;
 
   &.toggle-side-bar-transition {
-    transition: transform 1.3s ease(out-expo);
+    transition: opacity 1.3s ease(out-expo);
   }
-  &.toggle-side-bar-enter {
-    transform: translate3d(100%, 0, 0);
+}
+
+.info-section_overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 1s ease(out-expo);
+  cursor: pointer;
+
+  .toggle-side-bar-transition & {
+    transition: opacity 1s ease(out-expo) 1s;
   }
-  &.toggle-side-bar-leave {
-    transform: translate3d(100%, 0, 0);
+  .toggle-side-bar-enter & {
+    opacity: 0;
+  }
+  .toggle-side-bar-leave & {
+    opacity: 0;
   }
 }
 
 .info-section_container {
-  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40%;
   height: 100%;
+  z-index: 2;
+  background: $color-white;
+
+  transition: transform 1.3s ease(out-expo);
+
+  .toggle-side-bar-transition & {
+    transition: transform 1.3s ease(out-expo);
+  }
+  .toggle-side-bar-enter & {
+    transform: translate3d(100%, 0, 0);
+  }
+  .toggle-side-bar-leave & {
+    transform: translate3d(100%, 0, 0);
+  }
 }

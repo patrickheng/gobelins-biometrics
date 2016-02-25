@@ -1,4 +1,6 @@
-<div class="info-section_wrapper" v-show="isDisplay" transition="toggle-side-bar">
+<div class="info-section_wrapper" v-show="isDisplay" v-show="isDisplay" transition="toggle-side-bar">
+
+  <div class="info-section_overlay" v-show="isDisplay" v-on:click="closeSidebar"></div>
 
   <div class="info-section_container">
 

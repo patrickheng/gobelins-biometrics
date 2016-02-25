@@ -97,7 +97,7 @@ class Head extends THREE.Object3D {
     for (let i = 0; i < this.hotSpots.length; i++) {
       setTimeout(()=> {
         this.hotSpots[i].hotSpotDisplay();
-      }, 50)
+      }, 500)
     }
   }
 

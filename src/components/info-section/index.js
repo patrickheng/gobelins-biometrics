@@ -2,7 +2,7 @@
 
 import {
 	WINDOW_RESIZE,
-	SIDEBAR_TOGGLE
+  WEBGL_CLICK_ON_OBJECT
 } from '../../config/messages';
 
 export default Vue.extend({
@@ -41,7 +41,7 @@ export default Vue.extend({
 
       this.$on(WINDOW_RESIZE, this.onWindowResize);
 
-      this.$on(SIDEBAR_TOGGLE, this.onSidebarToggle);
+      this.$on(WEBGL_CLICK_ON_OBJECT, this.onClickOnObject);
 
       document.addEventListener('keyup', ::this.onKeyUp, false);
 
@@ -51,7 +51,7 @@ export default Vue.extend({
 
       this.$off(WINDOW_RESIZE, this.onWindowResize);
 
-      this.$off(SIDEBAR_TOGGLE, this.onSidebarToggle);
+      this.$off(WEBGL_CLICK_ON_OBJECT, this.onClickOnObject);
 
       document.removeEventListener('keyup', ::this.onKeyUp, false);
 
@@ -67,7 +67,7 @@ export default Vue.extend({
 
     },
 
-    onSidebarToggle() {
+    onClickOnObject() {
 
       if(!this.isDisplay) {
         this.showSidebar();
