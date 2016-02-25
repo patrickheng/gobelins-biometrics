@@ -26,15 +26,17 @@ class Hand extends THREE.Object3D {
 
   loadMesh() {
 
-    this.loader.load( 'meshes/head.obj', (object) => {
+    this.loader.load( 'meshes/hand.obj', (object) => {
 
       this.mesh = object;
 
-      this.mesh.scale.set( 4, 4, 4 );
+      this.mesh.scale.set( 0.5, 0.5, 0.5 );
 
-      this.mesh.position.x = -110;
+      this.mesh.position.x = 230;
+      this.mesh.position.y = -130;
+      this.mesh.position.z = -130;
 
-      this.mesh.rotation.y = Math.PI / 5;
+      this.rotation.y = Math.PI / 2;
 
       this.add(this.mesh);
 

@@ -77,6 +77,9 @@ class Scene extends THREE.Scene {
     this.head = Container.get( 'Head' );
     this.add(this.head);
 
+    this.hand = Container.get( 'Hand' );
+    this.add(this.hand);
+
     this.enterAnimation();
 
     this.animate();

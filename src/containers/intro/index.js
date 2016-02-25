@@ -95,7 +95,7 @@ export default Vue.extend({
         .fromTo(this.$els.fingerprint, 3, {scale: 1}, {scale: 1.2, ease: RoughEase.ease}, 0)
         .fromTo(this.$els.holdindication, 1, {opacity: 0}, {opacity: 1, ease: RoughEase.ease}, 0)
         .fromTo(this.$els.holdindication, 4, {width: 0 }, {width: 155, ease: Expo.easeOut}, 0)
-        .to(this.$els.backgroundcontainer, 5, {scale: 1.2, ease: Expo.easeOut}, 0)
+        .to(this.$els.backgroundcontainer, 3, {scale: 1.2, ease: Expo.easeOut}, 0)
         .fromTo(this.$els.holdindication, 1, {opacity: 0}, {opacity: 1, ease: RoughEase.ease}, 2)
 
       this.fingerprintTlDuration = this.fingerprintTl.duration();
