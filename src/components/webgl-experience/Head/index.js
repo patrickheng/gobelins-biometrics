@@ -30,6 +30,8 @@ class Head extends THREE.Object3D {
 
     this.clock = Container.get('Clock');
 
+    this.scene = Container.get('Scene');
+
     this.configuration = Container.get('Configuration');
 
     this.meshConfiguration = this.configuration.get('meshes.head');
@@ -72,6 +74,8 @@ class Head extends THREE.Object3D {
 
       this.update();
 
+      this.scene.onMeshLoad();
+
     }, this.onLoadProgress, this.onLoadError);
   }
 
@@ -101,7 +105,6 @@ class Head extends THREE.Object3D {
 
       this.hotSpots.push(hotSpot);
     }
-
   }
 
   onLoadProgress() {

@@ -75,6 +75,7 @@ export default Vue.extend({
       const deltaY = (ev.pageY - window.innerHeight / 2) / (window.innerHeight / 2);
 
       this.nodeGarden.onMouseMove(deltaX, deltaY);
+      this.scene.onMouseMove(ev);
     },
 
     generateGSAPTimeline() {

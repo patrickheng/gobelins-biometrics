@@ -15,5 +15,13 @@ export default {
     }
   ],
 
-  hand : []
-}
+  hand : [
+    {
+      name: "finger",
+      position: new THREE.Vector3( -21, 317, -18 ),
+      hex: 0xffffff,
+      intensity: 2,
+      distance: 5.9
+    }
+  ]
+};
