@@ -2,8 +2,11 @@
 
 import Emitter from 'utils/Emitter';
 
+import contentData from 'data/content';
+
 import {
 	WINDOW_RESIZE,
+	SIDEBAR_CLOSE,
 	WEBGL_ENABLE_RAYCAST,
 	WEBGL_DISABLE_RAYCAST,
   WEBGL_CLICK_ON_OBJECT
@@ -16,6 +19,7 @@ export default Vue.extend({
   data() {
 
     return {
+      title: '',
       isDisplay: false
     };
   },
@@ -45,7 +49,7 @@ export default Vue.extend({
 
       this.$on(WINDOW_RESIZE, this.onWindowResize);
 
-      Emitter.on(WEBGL_CLICK_ON_OBJECT, this.onClickOnObject);
+      Emitter.on(WEBGL_CLICK_ON_OBJECT, ::this.onClickOnObject);
 
       document.addEventListener('keyup', ::this.onKeyUp, false);
 
@@ -71,9 +75,11 @@ export default Vue.extend({
 
     },
 
-    onClickOnObject() {
-
+    onClickOnObject(objectRef) {
       if(!this.isDisplay) {
+        this.title = contentData[objectRef].name;
+
+        console.log(contentData[objectRef].name);
         this.showSidebar();
       } else {
         this.closeSidebar();
@@ -87,6 +93,7 @@ export default Vue.extend({
 
     closeSidebar() {
       this.isDisplay = false;
+			Emitter.emit(SIDEBAR_CLOSE);
 			Emitter.emit(WEBGL_ENABLE_RAYCAST);
     }
 

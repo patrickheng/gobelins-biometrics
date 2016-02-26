@@ -7,6 +7,7 @@ import Container from 'Container';
 import Clamp from 'utils/math/clamp';
 
 import {
+  SIDEBAR_CLOSE,
   WEBGL_CLICK_ON_OBJECT
 } from 'config/messages';
 
@@ -22,13 +23,17 @@ class Camera extends THREE.PerspectiveCamera {
    */
   constructor( configuration ) {
 
-    const { fov, aspect, near, far, position, target, orbitControls } = configuration.get('camera');
+    const { fov, aspect, near, far, position, target, orbitControls, movements } = configuration.get('camera');
 
     super( fov, aspect, near, far );
+
+    this.basePosition = position;
 
     this.position.set( position.x, position.y, position.z );
 
     this.target = target;
+
+    this.movements = movements;
 
     this.lookAt(this.target);
 
@@ -55,6 +60,7 @@ class Camera extends THREE.PerspectiveCamera {
     document.addEventListener( 'mousemove', ::this.onMouseMove, false );
 
     Emitter.on(WEBGL_CLICK_ON_OBJECT, ::this.onClickOnObject);
+    Emitter.on(SIDEBAR_CLOSE, ::this.onSidebarClose);
 
   }
 
@@ -66,7 +72,13 @@ class Camera extends THREE.PerspectiveCamera {
   }
 
   onClickOnObject(objectRef) {
-    console.log(objectRef);
+    const mvt = this.movements[objectRef];
+
+    TweenMax.to(this.position, 10, {x: mvt.position.x, y: mvt.position.y, z: mvt.position.z, ease: Expo.easeOut});
+  }
+
+  onSidebarClose() {
+    TweenMax.to(this.position, 2, {x: this.basePosition.x, y: this.basePosition.y, z: this.basePosition.z, ease: Expo.easeOut});
   }
 
   initGUI() {
@@ -75,7 +87,6 @@ class Camera extends THREE.PerspectiveCamera {
     folder.add(this.position, 'x');
     folder.add(this.position, 'y');
     folder.add(this.position, 'z');
-
   }
 
   /**
