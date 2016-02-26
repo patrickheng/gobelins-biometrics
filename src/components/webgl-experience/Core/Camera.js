@@ -4,7 +4,11 @@ import OrbitControls from '../Utils/OrbitControls';
 
 import Container from 'Container';
 
-import Clamp from 'utils/math/clamp';
+import clamp from 'utils/math/clamp';
+
+import find from 'lodash.find';
+
+import concat from 'lodash.concat';
 
 import {
   SIDEBAR_CLOSE,
@@ -35,6 +39,9 @@ class Camera extends THREE.PerspectiveCamera {
 
     this.movements = movements;
 
+    this.hotSpotsData = concat(configuration.get('hotSpots.head'), configuration.get('hotSpots.hand'));
+
+
     this.lookAt(this.target);
 
     this.gui = Container.get('GUI');
@@ -45,6 +52,8 @@ class Camera extends THREE.PerspectiveCamera {
 
     this.mouseX = 0;
     this.mouseY = 0;
+
+    this.isZoom = false;
 
     this.initGUI();
     this.addEventListeners();
@@ -71,13 +80,19 @@ class Camera extends THREE.PerspectiveCamera {
 
   }
 
-  onClickOnObject(objectRef) {
-    const mvt = this.movements[objectRef];
-    this.lookAt(this.target);
+  onClickOnObject(object) {
+
+    const mvt = this.movements[object.ref];
+
+    this.isZoom = true;
+
+    this.lookAt(object.position);
+
     TweenMax.to(this.position, 10, {x: mvt.position.x, y: mvt.position.y, z: mvt.position.z, ease: Expo.easeOut});
   }
 
   onSidebarClose() {
+    this.isZoom = true;
     TweenMax.to(this.position, 2, {x: this.basePosition.x, y: this.basePosition.y, z: this.basePosition.z, ease: Expo.easeOut});
   }
 
@@ -100,12 +115,14 @@ class Camera extends THREE.PerspectiveCamera {
   }
 
   update() {
+    if(!this.isZoom) {
+      this.position.x = clamp(-30, 30, this.position.x + ( this.mouseX - this.position.x ) * .003);
 
-    this.position.x = Clamp(-30, 30, this.position.x + ( this.mouseX - this.position.x ) * .003);
+      this.position.y = clamp(-40, 50, this.position.y + ( -this.mouseY - this.position.y ) * .010);
 
-    this.position.y = Clamp(-40, 50, this.position.y + ( -this.mouseY - this.position.y ) * .010);
+      this.lookAt(this.target);
+    }
 
-    this.lookAt(this.target);
   }
 }
 

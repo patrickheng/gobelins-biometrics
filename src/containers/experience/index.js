@@ -35,6 +35,8 @@ export default Vue.extend({
 
   ready() {
 
+    this.currentObject = null;
+
     this.currentObjectRef = null;
 
     this.addEventListeners();
@@ -74,13 +76,14 @@ export default Vue.extend({
       if(this.isIntersecting) {
         console.log('click on ', this.currentObjectRef);
 
-        Emitter.emit(WEBGL_CLICK_ON_OBJECT, this.currentObjectRef);
-				
+        Emitter.emit(WEBGL_CLICK_ON_OBJECT, this.currentObject);
+
         this.isIntersecting = false;
       }
     },
 
     onIsIntersecting(intersectObject) {
+			this.currentObject = intersectObject.object;
       this.currentObjectRef = intersectObject.object.ref;
       this.isIntersecting = true;
     },

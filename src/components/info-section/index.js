@@ -75,11 +75,11 @@ export default Vue.extend({
 
     },
 
-    onClickOnObject(objectRef) {
+    onClickOnObject(object) {
       if(!this.isDisplay) {
-        this.title = contentData[objectRef].name;
+        this.title = contentData[object.ref].name;
 
-        console.log(contentData[objectRef].name);
+        console.log(contentData[object.ref].name);
         this.showSidebar();
       } else {
         this.closeSidebar();
