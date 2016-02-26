@@ -7,7 +7,19 @@ export default {
   target: new THREE.Vector3( 0, 0, 0 ),
   orbitControls: false,
   movements: {
-    "oculaire" : {
+    oculaire: {
+      position: new THREE.Vector3( 0, 0, 160 )
+    },
+    vocale: {
+      position: new THREE.Vector3( 0, 0, 160 )
+    },
+    faciale: {
+      position: new THREE.Vector3( 0, 0, 160 )
+    },
+    veineux: {
+      position: new THREE.Vector3( 0, 0, 160 )
+    },
+    digitale: {
       position: new THREE.Vector3( 0, 0, 160 )
     }
   }

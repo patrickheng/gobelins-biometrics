@@ -73,7 +73,7 @@ class Camera extends THREE.PerspectiveCamera {
 
   onClickOnObject(objectRef) {
     const mvt = this.movements[objectRef];
-
+    this.lookAt(this.target);
     TweenMax.to(this.position, 10, {x: mvt.position.x, y: mvt.position.y, z: mvt.position.z, ease: Expo.easeOut});
   }
 

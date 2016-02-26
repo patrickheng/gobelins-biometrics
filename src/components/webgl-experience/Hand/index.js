@@ -97,7 +97,7 @@ class Hand extends THREE.Object3D {
     for (let i = 0; i < this.hotSpots.length; i++) {
 			setTimeout(()=> {
         this.hotSpots[i].hotSpotDisplay();
-      }, 500)
+      }, i * 350)
     }
   }
 
