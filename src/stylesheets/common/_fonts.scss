@@ -48,11 +48,11 @@
 
 @font-face {
   font-family: 'TSTAR Mono Round';
-  src: url('TStar-Reg.eot'); /* IE9 Compat Modes */
-  src: url('TStar-Reg.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('TStar-Reg.woff') format('woff'), /* Modern Browsers */
-       url('TStar-Reg.ttf')  format('truetype'), /* Safari, Android, iOS */
-       url('TStar-Reg.svg#c1bd07b51948d571deeef5e68b66bd55') format('svg'); /* Legacy iOS */
+  src: url('/fonts/TStar-Reg.eot'); /* IE9 Compat Modes */
+  src: url('/fonts/TStar-Reg.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/fonts/TStar-Reg.woff') format('woff'), /* Modern Browsers */
+       url('/fonts/TStar-Reg.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('/fonts/TStar-Reg.svg#c1bd07b51948d571deeef5e68b66bd55') format('svg'); /* Legacy iOS */
 
   font-style:   normal;
   font-weight:  400;

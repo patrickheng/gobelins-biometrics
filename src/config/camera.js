@@ -8,8 +8,8 @@ export default {
   orbitControls: false,
   movements: {
     oculaire: {
-      position: new THREE.Vector3( 0, 0, 160 ),
-      lookAt: new THREE.Vector3( 22, 8.7, 45 )
+      position: new THREE.Vector3( 66, 12, 130 ),
+      lookAt: new THREE.Vector3( 0, 5.2, 15 )
     },
     vocale: {
       position: new THREE.Vector3( 0, 0, 160 ),

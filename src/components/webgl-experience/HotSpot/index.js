@@ -61,7 +61,9 @@ class HotSpot extends THREE.PointLight {
   }
 
   addSphere() {
+  
     this.geom = new THREE.SphereGeometry(3, 5, 5);
+
     this.mat = new THREE.MeshBasicMaterial({
       color: this.hex,
       wireframe: true

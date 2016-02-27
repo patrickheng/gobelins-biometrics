@@ -20,9 +20,9 @@ export default Vue.extend({
   data() {
 
     return {
-      content: {
-        title: '',
-      },
+      content: {},
+      currentArticle: {},
+      isArticleViewMode: false,
       isDisplay: false
     };
   },
@@ -50,7 +50,6 @@ export default Vue.extend({
     },
 
     addEventListeners() {
-
 
       Emitter.on(WEBGL_CLICK_ON_OBJECT, this.onClickOnObject);
       Emitter.on(WEBGL_IS_INTERSECTING, this.onIsIntersecting);
@@ -84,7 +83,7 @@ export default Vue.extend({
     },
 
     onClickOnObject(object) {
-      this.content.title = contentData[object.ref].name;
+      this.content = contentData[object.ref];
       this.showSidebar();
     },
 
@@ -94,14 +93,28 @@ export default Vue.extend({
       }
     },
 
+    selectArticle(articleIndex) {
+      this.isArticleViewMode = true;
+      this.currentArticle = this.content.articles[articleIndex];
+      console.log(this.content, this.currentArticle);
+    },
+    backToIndex() {
+      this.isArticleViewMode = false;
+    },
     showSidebar() {
       this.isDisplay = true;
 			// Emitter.emit(WEBGL_DISABLE_RAYCAST);
     },
 
     closeSidebar() {
+      
       this.isDisplay = false;
       this.isIntersecting = false;
+
+      setTimeout(()=>{
+        this.isArticleViewMode = false;
+      }, 700)
+
       Emitter.emit(SIDEBAR_CLOSE);
       Emitter.emit(WEBGL_ENABLE_RAYCAST);
     }
