@@ -4,7 +4,6 @@ import Emitter from 'utils/Emitter';
 
 import {
 	WINDOW_RESIZE,
-	SIDEBAR_TOGGLE,
   WEBGL_IS_INTERSECTING,
   WEBGL_IS_NOT_INTERSECTING,
   WEBGL_CLICK_ON_OBJECT
@@ -74,8 +73,7 @@ export default Vue.extend({
 
     onClick() {
       if(this.isIntersecting) {
-        console.log('click on ', this.currentObjectRef);
-
+        
         Emitter.emit(WEBGL_CLICK_ON_OBJECT, this.currentObject);
 
         this.isIntersecting = false;
@@ -83,17 +81,13 @@ export default Vue.extend({
     },
 
     onIsIntersecting(intersectObject) {
-			this.currentObject = intersectObject.object;
+      this.currentObject = intersectObject.object;
       this.currentObjectRef = intersectObject.object.ref;
       this.isIntersecting = true;
     },
 
     onIsNotIntersecting() {
       this.isIntersecting = false;
-    },
-
-    toggleSideBar() {
-      this.$broadcast(SIDEBAR_TOGGLE);
     }
 
   },

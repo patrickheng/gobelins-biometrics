@@ -18,6 +18,7 @@ const messages = {
    * SIDEBAR
    */
   SIDEBAR_TOGGLE: 'SIDEBAR_TOGGLE',
+  SIDEBAR_OPEN: 'SIDEBAR_OPEN',
   SIDEBAR_CLOSE: 'SIDEBAR_CLOSE',
 
   /*

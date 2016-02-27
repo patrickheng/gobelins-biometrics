@@ -5,10 +5,11 @@ import Emitter from 'utils/Emitter';
 import contentData from 'data/content';
 
 import {
-	WINDOW_RESIZE,
 	SIDEBAR_CLOSE,
 	WEBGL_ENABLE_RAYCAST,
 	WEBGL_DISABLE_RAYCAST,
+  WEBGL_IS_INTERSECTING,
+  WEBGL_IS_NOT_INTERSECTING,
   WEBGL_CLICK_ON_OBJECT
 } from '../../config/messages';
 
@@ -19,13 +20,16 @@ export default Vue.extend({
   data() {
 
     return {
-      title: '',
+      content: {
+        title: '',
+      },
       isDisplay: false
     };
   },
 
   created() {
     this.bind();
+    this.isIntersecting = false;
   },
 
   ready() {
@@ -47,22 +51,30 @@ export default Vue.extend({
 
     addEventListeners() {
 
-      this.$on(WINDOW_RESIZE, this.onWindowResize);
 
-      Emitter.on(WEBGL_CLICK_ON_OBJECT, ::this.onClickOnObject);
+      Emitter.on(WEBGL_CLICK_ON_OBJECT, this.onClickOnObject);
+      Emitter.on(WEBGL_IS_INTERSECTING, this.onIsIntersecting);
+      Emitter.on(WEBGL_IS_NOT_INTERSECTING, this.onIsNotIntersecting);
 
-      document.addEventListener('keyup', ::this.onKeyUp, false);
+      document.addEventListener('keyup', this.onKeyUp, false);
 
     },
 
     removeEventListeners() {
-
-      this.$off(WINDOW_RESIZE, this.onWindowResize);
-
       Emitter.off(WEBGL_CLICK_ON_OBJECT, this.onClickOnObject);
+      Emitter.off(WEBGL_IS_INTERSECTING, this.onIsIntersecting);
+      Emitter.off(WEBGL_IS_NOT_INTERSECTING, this.onIsNotIntersecting);
 
-      document.removeEventListener('keyup', ::this.onKeyUp, false);
+      document.removeEventListener('keyup', this.onKeyUp, false);
 
+    },
+
+    onIsIntersecting() {
+      this.isIntersecting = true;
+    },
+
+    onIsNotIntersecting() {
+      this.isIntersecting = false;
     },
 
     onKeyUp(ev) {
@@ -71,30 +83,27 @@ export default Vue.extend({
       }
     },
 
-    onWindowResize(width, height) {
-
+    onClickOnObject(object) {
+      this.content.title = contentData[object.ref].name;
+      this.showSidebar();
     },
 
-    onClickOnObject(object) {
-      if(!this.isDisplay) {
-        this.title = contentData[object.ref].name;
-
-        console.log(contentData[object.ref].name);
-        this.showSidebar();
-      } else {
+    onClickOnOverlay() {
+      if(!this.isIntersecting) {
         this.closeSidebar();
       }
     },
 
     showSidebar() {
       this.isDisplay = true;
-			Emitter.emit(WEBGL_DISABLE_RAYCAST);
+			// Emitter.emit(WEBGL_DISABLE_RAYCAST);
     },
 
     closeSidebar() {
       this.isDisplay = false;
-			Emitter.emit(SIDEBAR_CLOSE);
-			Emitter.emit(WEBGL_ENABLE_RAYCAST);
+      this.isIntersecting = false;
+      Emitter.emit(SIDEBAR_CLOSE);
+      Emitter.emit(WEBGL_ENABLE_RAYCAST);
     }
 
   },

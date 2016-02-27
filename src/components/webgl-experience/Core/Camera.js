@@ -33,14 +33,16 @@ class Camera extends THREE.PerspectiveCamera {
 
     this.basePosition = position;
 
+
     this.position.set( position.x, position.y, position.z );
+
+    this.baseTarget = target;
 
     this.target = target;
 
     this.movements = movements;
 
     this.hotSpotsData = concat(configuration.get('hotSpots.head'), configuration.get('hotSpots.hand'));
-
 
     this.lookAt(this.target);
 
@@ -82,18 +84,22 @@ class Camera extends THREE.PerspectiveCamera {
 
   onClickOnObject(object) {
 
-    const mvt = this.movements[object.ref];
+    const mvt = this.movements[object.ref].position;
+    const direction = this.movements[object.ref].lookAt;
+
+    // const direction = find(this.hotSpotsData, {ref: object.ref}).lookAt;
 
     this.isZoom = true;
 
-    this.lookAt(object.position);
-
-    TweenMax.to(this.position, 10, {x: mvt.position.x, y: mvt.position.y, z: mvt.position.z, ease: Expo.easeOut});
+    TweenMax.to(this.position, 6, {x: mvt.x, y: mvt.y, z: mvt.z, ease: Expo.easeOut});
+    TweenMax.to(this.target, 6, {x: direction.x, y: direction.y, z: direction.z, ease: Expo.easeOut});
   }
 
   onSidebarClose() {
-    this.isZoom = true;
+    this.isZoom = false;
+
     TweenMax.to(this.position, 2, {x: this.basePosition.x, y: this.basePosition.y, z: this.basePosition.z, ease: Expo.easeOut});
+    TweenMax.to(this.target, 2, {x: 0, y: 0, z: 0, ease: Expo.easeOut});
   }
 
   initGUI() {
@@ -102,6 +108,9 @@ class Camera extends THREE.PerspectiveCamera {
     folder.add(this.position, 'x');
     folder.add(this.position, 'y');
     folder.add(this.position, 'z');
+    folder.add(this.target, 'x').listen();
+    folder.add(this.target, 'y').listen();
+    folder.add(this.target, 'z').listen();
   }
 
   /**
@@ -119,9 +128,9 @@ class Camera extends THREE.PerspectiveCamera {
       this.position.x = clamp(-30, 30, this.position.x + ( this.mouseX - this.position.x ) * .003);
 
       this.position.y = clamp(-40, 50, this.position.y + ( -this.mouseY - this.position.y ) * .010);
-
-      this.lookAt(this.target);
     }
+
+    this.lookAt(this.target);
 
   }
 }

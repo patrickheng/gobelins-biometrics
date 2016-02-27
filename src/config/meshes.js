@@ -5,7 +5,7 @@ export default {
     scale: new THREE.Vector3( 3.6, 3.6, 3.6 )
   },
   hand: {
-    position: new THREE.Vector3( 100, -230, 0 ),
+    position: new THREE.Vector3( 105, -230, 0 ),
     rotation: new THREE.Vector3( 0, 0.9, 0 ),
     scale: new THREE.Vector3( 0.5, 0.5, 0.5 )
   }

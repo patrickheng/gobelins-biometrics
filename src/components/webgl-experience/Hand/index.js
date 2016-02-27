@@ -15,7 +15,7 @@ import {
 /**
  * Hand class
  */
-class Hand extends THREE.Object3D {
+class Hand extends THREE.Group {
 
   /**
    * Constructor function
@@ -88,7 +88,7 @@ class Hand extends THREE.Object3D {
 
     folder.add(this.position, 'x');
     folder.add(this.position, 'y');
-    folder.add(this.position, 'z', -20, 2);
+    folder.add(this.position, 'z');
     folder.add(this.rotation, 'y').name('rotation y');
 
   }
