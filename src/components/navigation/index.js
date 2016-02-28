@@ -29,11 +29,19 @@ export default Vue.extend({
 
   created() {
     this.bind();
+    this.contentDictionary = [];
+    this.nbChapters = 5;
+    this.currentIndex = 0;
+    this.navTimeout = null;
+
+    for (let chapter in contentData) {
+      this.contentDictionary.push(chapter);
+    }
   },
 
   ready() {
-    this.currentIndex = 0;
     this.addEventListeners();
+    this.generateTimelineMax();
   },
 
   beforeDestroy() {
@@ -55,8 +63,16 @@ export default Vue.extend({
     },
 
     removeEventListeners() {
-      Emitter.off(WEBGL_CLICK_ON_OBJECT, this.showNavigatioff);
+      Emitter.off(WEBGL_CLICK_ON_OBJECT, this.showNavigation);
       Emitter.off(SIDEBAR_CLOSE, this.hideNavigation);
+    },
+
+    generateTimelineMax() {
+      this.tl = new TimelineMax({paused: true});
+
+      this.tl
+        .to(this.$els.container, 0.4, {opacity: 0, y: '50%', ease: Expo.easeOut})
+        .to(this.$els.container, 0.4, {opacity: 1, y: '0%', ease: Expo.easeOut});
     },
 
     showNavigation(object) {
@@ -66,35 +82,38 @@ export default Vue.extend({
     },
 
     goToPreviousChapter() {
-      this.launchSwitchAnimation(()=>{
-        this.currentIndex = (this.currentIndex > 0 ) ? this.currentIndex - 1 : 4;
+
+      this.tl.stop();
+      this.tl.play(0);
+
+      clearTimeout(this.navTimeout);
+
+      this.navTimeout = setTimeout(()=> {
+        this.currentIndex = (this.currentIndex > 0 ) ? this.currentIndex - 1 : this.nbChapters - 1;
         this.setNavigationChapter();
-        Emitter.emit(NAVIGATION_SWITCH_CHAPTER, find(contentData, {id: this.currentIndex}).ref);
-      })
+        Emitter.emit(NAVIGATION_SWITCH_CHAPTER, this.contentDictionary[this.currentIndex]);
+      }, 200);
     },
 
     goToNextChapter() {
-      this.launchSwitchAnimation(()=>{
-        this.currentIndex = (this.currentIndex < 4 ) ? this.currentIndex + 1 : 0;
+      this.tl.stop();
+      this.tl.play(0);
+
+      clearTimeout(this.navTimeout);
+
+      this.navTimeout = setTimeout(()=> {
+        this.currentIndex = (this.currentIndex < this.nbChapters - 1) ? this.currentIndex + 1 : 0;
         this.setNavigationChapter();
-        Emitter.emit(NAVIGATION_SWITCH_CHAPTER, find(contentData, {id: this.currentIndex}).ref);
-      })
-    },
-
-    launchSwitchAnimation(callback) {
-      const tl = new TimelineMax();
-
-      tl
-        .to(this.$els.container, 0.4, {opacity: 0, y: '50%', ease: Expo.easeOut, onComplete: callback })
-        .to(this.$els.container, 0.4, {opacity: 1, y: '0%', ease: Expo.easeOut});
+        Emitter.emit(NAVIGATION_SWITCH_CHAPTER, this.contentDictionary[this.currentIndex]);
+      }, 200);
     },
 
     setNavigationChapter() {
-      const prevIndex = (this.currentIndex > 0 ) ? this.currentIndex - 1 : 4;
-      const nextIndex = (this.currentIndex < 4 ) ? this.currentIndex + 1 : 0;
+      const prevIndex = (this.currentIndex > 0 ) ? this.currentIndex - 1 : this.nbChapters - 1;
+      const nextIndex = (this.currentIndex < this.nbChapters - 1 ) ? this.currentIndex + 1 : 0;
 
-      this.previousChapter = find(contentData, {id: prevIndex}).title;
-      this.nextChapter = find(contentData, {id: nextIndex}).title;
+      this.previousChapter = contentData[this.contentDictionary[prevIndex]].title;
+      this.nextChapter = contentData[this.contentDictionary[nextIndex]].title;
     },
 
     hideNavigation() {

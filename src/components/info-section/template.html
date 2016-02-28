@@ -7,14 +7,14 @@
     <svg class="info-section-close" v-on:click="closeSidebar" xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="18 -30 43.4 43.5" xml:space="preserve"><path
       d="M41-8.2l20.1-20.2c0.4-0.4 0.4-1 0-1.3 -0.4-0.4-1-0.4-1.3 0L39.7-9.5 19.6-29.7c-0.4-0.4-1-0.4-1.3 0 -0.4 0.4-0.4 1 0 1.3L38.4-8.2 18.3 12c-0.4 0.4-0.4 1 0 1.3 0.2 0.2 0.4 0.3 0.7 0.3s0.5-0.1 0.7-0.3L39.7-6.9l20.1 20.2c0.2 0.2 0.4 0.3 0.7 0.3 0.2 0 0.5-0.1 0.7-0.3 0.4-0.4 0.4-0.9 0-1.3L41-8.2z"/></svg>
 
-    <h1 class="info-section_chapter-title">{{content.title}}</h1>
+    <h1 class="info-section_chapter-title" v-el:title>{{content.title}}</h1>
 
     <div class="info-section_slider" :class="{ 'info-section_slider--article-view': isArticleViewMode }" >
 
 
       <div class="info-section_article-summary">
 
-        <ul class="info-section_article-list">
+        <ul class="info-section_article-list" v-el:articlelist>
 
           <li class="info-section_article-element" v-for="article in content.articles" v-on:click="selectArticle($index)">
 
@@ -30,7 +30,7 @@
 
       </div>
 
-      <div class="info-section_article-content">
+      <div class="info-section_article-content" v-el:selectedarticle>
 
         <button class="info-section_back-to-index" v-on:click="backToIndex()">Revenir à l'index</button>
 

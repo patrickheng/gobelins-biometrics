@@ -108,8 +108,8 @@ class Camera extends THREE.PerspectiveCamera {
     const mvt = this.movements[ref].position;
     const direction = this.movements[ref].lookAt;
 
-    TweenMax.to(this.position, 6, {x: mvt.x, y: mvt.y, z: mvt.z, ease: Expo.easeOut});
-    TweenMax.to(this.target, 6, {x: direction.x, y: direction.y, z: direction.z, ease: Expo.easeOut});
+    TweenMax.to(this.position, 4, {x: mvt.x, y: mvt.y, z: mvt.z, ease: Expo.easeOut});
+    TweenMax.to(this.target, 4, {x: direction.x, y: direction.y, z: direction.z, ease: Expo.easeOut});
   }
 
   initGUI() {

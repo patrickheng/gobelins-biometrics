@@ -100,6 +100,8 @@
   padding-bottom: 20px;
   cursor: pointer;
   transition: color 0.2s ease-out;
+  opacity: 0;
+
   &:hover {
     color: $color-grey;
   }
@@ -148,6 +150,7 @@
   fill: $color-white;
   cursor: pointer;
   transition: all 0.3s ease-out;
+  z-index: 5;
   &:hover {
     fill: $color-grey;
     transform: scale(1.05);

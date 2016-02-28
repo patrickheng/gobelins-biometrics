@@ -34,6 +34,7 @@ export default Vue.extend({
   },
 
   ready() {
+    this.nextTitle = '';
     this.addEventListeners();
   },
 
@@ -64,7 +65,7 @@ export default Vue.extend({
     removeEventListeners() {
       Emitter.off(WEBGL_CLICK_ON_OBJECT, this.onClickOnObject);
       Emitter.off(WEBGL_IS_INTERSECTING, this.onIsIntersecting);
-      Emitter.off(WEBGL_IS_NOT_INTERSECTING, this.onIsNotIntersecting);
+      Emitter.off(WEBGz_IS_NOT_INTERSECTING, this.onIsNotIntersecting);
 			Emitter.off(NAVIGATION_SWITCH_CHAPTER, this.onSwitchChapter);
 
       document.removeEventListener('keyup', this.onKeyUp, false);
@@ -86,12 +87,33 @@ export default Vue.extend({
     },
 
     onClickOnObject(object) {
+
       this.content = contentData[object.ref];
+
       this.showSidebar();
+
     },
 
 		onSwitchChapter(ref) {
-			this.content = contentData[ref];
+
+      this.content.id= contentData[ref].id;
+      this.content.ref= contentData[ref].ref;
+      this.content.articles= contentData[ref].articles;
+
+      this.nextTitle = contentData[ref].title;
+
+			this.isArticleViewMode = false;
+
+      this.displayArticles();
+
+      const tl = new TimelineMax();
+
+      tl
+        .fromTo(this.$els.title, 0.5, { y: 0 , opacity: 1 }, { y: -25, opacity: 0, ease: Expo.EaseOut, onComplete: ()=>{
+          this.content.title = this.nextTitle;
+        }})
+        .fromTo(this.$els.title, 0.5, { y: 25 , opacity: 0 }, { y: 0, opacity: 1, ease: Expo.EaseOut })
+
 		},
 
     onClickOnOverlay() {
@@ -103,18 +125,37 @@ export default Vue.extend({
     selectArticle(articleIndex) {
       this.isArticleViewMode = true;
       this.currentArticle = this.content.articles[articleIndex];
-      console.log(this.content, this.currentArticle);
+
+      const currentArticleEls = this.$els.selectedarticle.children;
+      TweenMax.set(currentArticleEls, {opacity: 0, x:0});
+      TweenMax.staggerFromTo(currentArticleEls, 2, {opacity: 0, x: 100}, {opacity: 1, x: 0, ease: Expo.easeOut}, 0.3);
     },
+
     backToIndex() {
       this.isArticleViewMode = false;
     },
+
     showSidebar() {
       this.isDisplay = true;
+      this.displayArticles();
+
 			// Emitter.emit(WEBGL_DISABLE_RAYCAST);
     },
 
-    closeSidebar() {
+    displayArticles() {
 
+			const articles = this.$els.articlelist.getElementsByClassName('info-section_article-element');
+
+      TweenMax.set(articles, {opacity: 0, x:0});
+      TweenMax.fromTo(this.$els.title, 2.5, {opacity: 0, y: 50}, {opacity: 1, y: 0, ease: Expo.easeOut}, 0.4);
+
+      setTimeout(()=> {
+        TweenMax.staggerFromTo(articles, 2, {opacity: 0, x: 100}, {opacity: 1, x: 0, ease: Expo.easeOut}, 0.4);
+      }, 300);
+
+    },
+
+    closeSidebar() {
       this.isDisplay = false;
       this.isIntersecting = false;
 
