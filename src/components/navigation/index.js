@@ -10,7 +10,8 @@ import 'gsap';
 
 import {
   WEBGL_CLICK_ON_OBJECT,
-  SIDEBAR_CLOSE
+  SIDEBAR_CLOSE,
+  NAVIGATION_SWITCH_CHAPTER
 } from '../../config/messages';
 
 export default Vue.extend({
@@ -65,20 +66,27 @@ export default Vue.extend({
     },
 
     goToPreviousChapter() {
-
-      const tl = new TimelineMax();
-
-      tl
-        .to(this.$els.container, 0.4, {opacity: 0, y: '50%', ease: Expo.easeOut, onComplete: ()=> {
-          this.currentIndex = (this.currentIndex > 0 ) ? this.currentIndex - 1 : 4;
-          this.setNavigationChapter();
-        }})
-        .to(this.$els.container, 0.4, {opacity: 1, y: '0%', ease: Expo.easeOut});
+      this.launchSwitchAnimation(()=>{
+        this.currentIndex = (this.currentIndex > 0 ) ? this.currentIndex - 1 : 4;
+        this.setNavigationChapter();
+        Emitter.emit(NAVIGATION_SWITCH_CHAPTER, find(contentData, {id: this.currentIndex}).ref);
+      })
     },
 
     goToNextChapter() {
-      this.currentIndex = (this.currentIndex < 4 ) ? this.currentIndex + 1 : 0;
-      this.setNavigationChapter();
+      this.launchSwitchAnimation(()=>{
+        this.currentIndex = (this.currentIndex < 4 ) ? this.currentIndex + 1 : 0;
+        this.setNavigationChapter();
+        Emitter.emit(NAVIGATION_SWITCH_CHAPTER, find(contentData, {id: this.currentIndex}).ref);
+      })
+    },
+
+    launchSwitchAnimation(callback) {
+      const tl = new TimelineMax();
+
+      tl
+        .to(this.$els.container, 0.4, {opacity: 0, y: '50%', ease: Expo.easeOut, onComplete: callback })
+        .to(this.$els.container, 0.4, {opacity: 1, y: '0%', ease: Expo.easeOut});
     },
 
     setNavigationChapter() {

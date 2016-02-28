@@ -12,7 +12,8 @@ import concat from 'lodash.concat';
 
 import {
   SIDEBAR_CLOSE,
-  WEBGL_CLICK_ON_OBJECT
+  WEBGL_CLICK_ON_OBJECT,
+  NAVIGATION_SWITCH_CHAPTER
 } from 'config/messages';
 
 /**
@@ -32,7 +33,6 @@ class Camera extends THREE.PerspectiveCamera {
     super( fov, aspect, near, far );
 
     this.basePosition = position;
-
 
     this.position.set( position.x, position.y, position.z );
 
@@ -72,6 +72,7 @@ class Camera extends THREE.PerspectiveCamera {
 
     Emitter.on(WEBGL_CLICK_ON_OBJECT, ::this.onClickOnObject);
     Emitter.on(SIDEBAR_CLOSE, ::this.onSidebarClose);
+    Emitter.on(NAVIGATION_SWITCH_CHAPTER, ::this.onSwitchChapter);
 
   }
 
@@ -100,6 +101,15 @@ class Camera extends THREE.PerspectiveCamera {
 
     TweenMax.to(this.position, 2, {x: this.basePosition.x, y: this.basePosition.y, z: this.basePosition.z, ease: Expo.easeOut});
     TweenMax.to(this.target, 2, {x: 0, y: 0, z: 0, ease: Expo.easeOut});
+  }
+
+  onSwitchChapter(ref) {
+
+    const mvt = this.movements[ref].position;
+    const direction = this.movements[ref].lookAt;
+
+    TweenMax.to(this.position, 6, {x: mvt.x, y: mvt.y, z: mvt.z, ease: Expo.easeOut});
+    TweenMax.to(this.target, 6, {x: direction.x, y: direction.y, z: direction.z, ease: Expo.easeOut});
   }
 
   initGUI() {

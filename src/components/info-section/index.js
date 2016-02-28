@@ -6,6 +6,7 @@ import contentData from 'data/content';
 
 import {
 	SIDEBAR_CLOSE,
+	NAVIGATION_SWITCH_CHAPTER,
 	WEBGL_ENABLE_RAYCAST,
 	WEBGL_DISABLE_RAYCAST,
   WEBGL_IS_INTERSECTING,
@@ -54,6 +55,7 @@ export default Vue.extend({
       Emitter.on(WEBGL_CLICK_ON_OBJECT, this.onClickOnObject);
       Emitter.on(WEBGL_IS_INTERSECTING, this.onIsIntersecting);
       Emitter.on(WEBGL_IS_NOT_INTERSECTING, this.onIsNotIntersecting);
+      Emitter.on(NAVIGATION_SWITCH_CHAPTER, this.onSwitchChapter);
 
       document.addEventListener('keyup', this.onKeyUp, false);
 
@@ -63,6 +65,7 @@ export default Vue.extend({
       Emitter.off(WEBGL_CLICK_ON_OBJECT, this.onClickOnObject);
       Emitter.off(WEBGL_IS_INTERSECTING, this.onIsIntersecting);
       Emitter.off(WEBGL_IS_NOT_INTERSECTING, this.onIsNotIntersecting);
+			Emitter.off(NAVIGATION_SWITCH_CHAPTER, this.onSwitchChapter);
 
       document.removeEventListener('keyup', this.onKeyUp, false);
 
@@ -87,6 +90,10 @@ export default Vue.extend({
       this.showSidebar();
     },
 
+		onSwitchChapter(ref) {
+			this.content = contentData[ref];
+		},
+
     onClickOnOverlay() {
       if(!this.isIntersecting) {
         this.closeSidebar();
@@ -107,7 +114,7 @@ export default Vue.extend({
     },
 
     closeSidebar() {
-      
+
       this.isDisplay = false;
       this.isIntersecting = false;
 
