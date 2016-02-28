@@ -4,8 +4,6 @@ import Emitter from 'utils/Emitter';
 
 import contentData from 'data/content';
 
-import find from 'lodash.find';
-
 import 'gsap';
 
 import {

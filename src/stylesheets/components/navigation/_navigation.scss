@@ -37,3 +37,16 @@
     color: $color-grey;
   }
 }
+
+.navigation_element-arrow {
+  display: inline-block;
+  transform: translate3d(0,1px,0);
+  transition: transform 0.3s ease-out;
+
+  .navigation_element--left:hover & {
+    transform: translate3d(-4px, 1px, 0);
+  }
+  .navigation_element--right:hover & {
+    transform: translate3d(4px, 1px, 0);
+  }
+}

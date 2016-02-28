@@ -99,8 +99,8 @@ class Camera extends THREE.PerspectiveCamera {
   onSidebarClose() {
     this.isZoom = false;
 
-    TweenMax.to(this.position, 2, {x: this.basePosition.x, y: this.basePosition.y, z: this.basePosition.z, ease: Expo.easeOut});
-    TweenMax.to(this.target, 2, {x: 0, y: 0, z: 0, ease: Expo.easeOut});
+    TweenMax.to(this.position, 4, {x: this.basePosition.x, y: this.basePosition.y, z: this.basePosition.z, ease: Expo.easeOut});
+    TweenMax.to(this.target, 4, {x: 0, y: 0, z: 0, ease: Expo.easeOut});
   }
 
   onSwitchChapter(ref) {

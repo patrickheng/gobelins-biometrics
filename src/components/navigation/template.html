@@ -3,13 +3,13 @@
   <div class="navigation_container" v-el:container>
 
     <div class="navigation_element navigation_element--left" v-on:click="goToPreviousChapter()">
-      <span class="navigation_element-arrow navigation_element-arrow--left">$</span>
+      <span class="icon-arrow-left navigation_element-arrow navigation_element-arrow--left"></span>
       <span class="navigation_element-name">{{previousChapter}}</span>
     </div>
 
     <div class="navigation_element navigation_element--right" v-on:click="goToNextChapter()">
       <span class="navigation_element-name">{{nextChapter}}</span>
-      <span class="navigation_element-arrow navigation_element-arrow--right">$</span>
+      <span class="icon-arrow-right navigation_element-arrow navigation_element-arrow--right"></span>
     </div>
 
   </div>

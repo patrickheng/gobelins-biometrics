@@ -2,6 +2,7 @@ export default {
   oculaire: {
     id: 0,
     title: 'Reconnaissance oculaire',
+    ref: 'oculaire',
     articles: [
       {
         title: "Lunettes connectées et reconnaissance vocale au service des sourds",
@@ -22,6 +23,7 @@ export default {
   vocale: {
     id: 1,
     title: 'Reconnaissance vocale',
+    ref: 'vocale',
     articles: [
       {
         title: "Lunettes connectées et reconnaissance vocale au service des sourds",
@@ -42,6 +44,7 @@ export default {
   faciale: {
     id: 2,
     title: 'Reconnaissance faciale',
+    ref: 'faciale',
     articles: [
       {
         title: "Lunettes connectées et reconnaissance vocale au service des sourds",
@@ -62,6 +65,7 @@ export default {
   veineux: {
     id: 3,
     title: 'Réseaux veineux',
+    ref: 'veineux',
     articles: [
       {
         title: "Lunettes connectées et reconnaissance vocale au service des sourds",
@@ -82,6 +86,7 @@ export default {
   digitale: {
     id: 4,
     title: 'Empreinte digitale',
+    ref: 'digitale',
     articles: [
       {
         title: "Lunettes connectées et reconnaissance vocale au service des sourds",

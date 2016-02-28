@@ -94,6 +94,12 @@
   font-family: $font-tstar;
 }
 
+.info-section_article-summary-image {
+  display: block;
+  margin: auto;
+  width: 100%;  
+}
+
 .info-section_article-element {
   position: relative;
   padding-top: 30px;
@@ -168,6 +174,15 @@
 
   &:hover {
     color: $color-grey;
+  }
+}
+
+.info-section_back-to-index-icon {
+  display: inline-block;
+  transition: transform 0.3s ease-out;
+
+  .info-section_back-to-index:hover & {
+    transform: translateX(-4px);
   }
 }
 

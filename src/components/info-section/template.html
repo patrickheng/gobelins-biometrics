@@ -14,6 +14,8 @@
 
       <div class="info-section_article-summary">
 
+        <img class="info-section_article-summary-image" src="/images/chapters-anim/{{content.ref}}.gif" alt="{{content.title}} intro" />
+
         <ul class="info-section_article-list" v-el:articlelist>
 
           <li class="info-section_article-element" v-for="article in content.articles" v-on:click="selectArticle($index)">
@@ -32,7 +34,10 @@
 
       <div class="info-section_article-content" v-el:selectedarticle>
 
-        <button class="info-section_back-to-index" v-on:click="backToIndex()">Revenir à l'index</button>
+        <button class="info-section_back-to-index" v-on:click="backToIndex()">
+          <span class="icon-arrow-left info-section_back-to-index-icon"></span>
+          Revenir à l'index
+        </button>
 
         <img class="info-section_article-picture" src="http://lorempicsum.com/up/627/300/4" alt="{{currentArticle.title}} " />
 
