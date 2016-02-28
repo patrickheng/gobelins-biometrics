@@ -1,5 +1,6 @@
 export default {
   oculaire: {
+    id: 0,
     title: 'Reconnaissance oculaire',
     ref: 'oculaire',
     articles: [
@@ -20,21 +21,25 @@ export default {
     ]
   },
   vocale: {
+    id: 1,
     title: 'Reconnaissance vocale',
     ref: 'vocale',
     content: ''
   },
   faciale: {
+    id: 2,
     title: 'Reconnaissance faciale',
     ref: 'faciale',
     content: ''
   },
   veineux: {
+    id: 3,
     title: 'Réseaux veineux',
     ref: 'veineux',
     content: ''
   },
   digitale: {
+    id: 4,
     title: 'Empreinte digitale',
     ref: 'digitale',
     content: ''

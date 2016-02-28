@@ -13,6 +13,8 @@ import InfoSectionComponent from 'components/info-section';
 
 import WebglExperienceComponent from 'components/webgl-experience';
 
+import NavigationComponent from 'components/navigation';
+
 import CurrentIntersectIndicatorComponent from 'components/current-intersect-indicator';
 
 import 'gsap';
@@ -73,7 +75,7 @@ export default Vue.extend({
 
     onClick() {
       if(this.isIntersecting) {
-        
+
         Emitter.emit(WEBGL_CLICK_ON_OBJECT, this.currentObject);
 
         this.isIntersecting = false;
@@ -98,6 +100,7 @@ export default Vue.extend({
   components: {
     InfoSectionComponent,
     WebglExperienceComponent,
-    CurrentIntersectIndicatorComponent
+    CurrentIntersectIndicatorComponent,
+    NavigationComponent
   }
 });
