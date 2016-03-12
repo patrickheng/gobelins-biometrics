@@ -4,6 +4,7 @@ import Emitter from 'utils/Emitter';
 
 import {
 	WINDOW_RESIZE,
+  WEBGL_MESH_LOADED,
   WEBGL_IS_INTERSECTING,
   WEBGL_IS_NOT_INTERSECTING,
   WEBGL_CLICK_ON_OBJECT
@@ -60,12 +61,14 @@ export default Vue.extend({
     addEventListeners() {
       Emitter.on(WEBGL_IS_INTERSECTING, this.onIsIntersecting);
       Emitter.on(WEBGL_IS_NOT_INTERSECTING, this.onIsNotIntersecting);
+      Emitter.on(WEBGL_MESH_LOADED, this.isLoaded);
       this.$on(WINDOW_RESIZE, this.onWindowResize);
     },
 
     removeEventListeners() {
       Emitter.off(WEBGL_IS_INTERSECTING, this.offIsIntersecting);
       Emitter.off(WEBGL_IS_NOT_INTERSECTING, this.onIsNotIntersecting);
+      Emitter.off(WEBGL_MESH_LOADED, this.isLoaded);
       this.$off(WINDOW_RESIZE, this.onWindowResize);
     },
 
@@ -90,7 +93,15 @@ export default Vue.extend({
 
     onIsNotIntersecting() {
       this.isIntersecting = false;
-    }
+    },
+
+		isLoaded() {
+
+      const loader = document.querySelector('.experience_loading');
+
+      TweenMax.to(loader, 1, { autoAlpha:0, ease: Expo.easeOut });
+
+		}
 
   },
 

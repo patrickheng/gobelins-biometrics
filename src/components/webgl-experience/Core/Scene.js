@@ -81,7 +81,7 @@ class Scene extends THREE.Scene {
 
     this.createScene();
 
-    this.initGUI();
+    //this.initGUI();
   }
 
   addEventListeners() {
@@ -119,8 +119,6 @@ class Scene extends THREE.Scene {
 
     this.hand = Container.get( 'Hand' );
     this.add(this.hand);
-
-    this.enterAnimation();
 
     this.animate();
 
@@ -167,6 +165,8 @@ class Scene extends THREE.Scene {
       hotSpotsLight.map((hotSpot)=> {
         this.hotSpots.push(hotSpot.mesh);
       })
+
+      this.enterAnimation();
     }
 
   }

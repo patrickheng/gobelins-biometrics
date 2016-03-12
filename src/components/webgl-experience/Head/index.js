@@ -72,7 +72,7 @@ class Head extends THREE.Object3D {
 
       this.add( this.mesh );
 
-      this.initGUI();
+      //this.initGUI();
 
       this.generateHotSpots();
 

@@ -83,12 +83,12 @@
 .info-section_chapter-title {
   font-family: $font-circular;
   font-size: 3rem;
-  left: 5%;
+  left: 0;
   position: absolute;
   z-index: 2;
   background: $color-blue-dark;
   width: 90%;
-  padding: 4rem 3rem 2rem 3rem;
+  padding: 4rem 3rem 2rem 5%;
 }
 
 .info-section_article-summary,

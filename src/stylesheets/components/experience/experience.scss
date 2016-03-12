@@ -9,3 +9,30 @@
     cursor: pointer !important;
   }
 }
+
+.experience_loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  color: $color-white;
+  font-family: $font-circular;
+  z-index: 100;
+  font-size: 1.5rem;
+}
+
+.experience_loading-icon {
+  width: 20px;
+  height: 20px;
+  margin: 2rem auto 0 auto;
+  border-radius: 50%;
+  border: 2px solid $color-white;
+  border-left-color: transparent;
+  animation: animate-loader-simple-spin 1s ease-in-out infinite;
+}
+
+@keyframes animate-loader-simple-spin {
+  100% {
+    transform: rotate(360deg)
+  }
+}

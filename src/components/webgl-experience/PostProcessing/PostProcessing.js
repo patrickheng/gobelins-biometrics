@@ -26,7 +26,7 @@ class PostProcessing {
     this.composer = effectComposer;
     this.gui = gui;
 
-    this.initGUI();
+    //this.initGUI();
   }
 
   /**

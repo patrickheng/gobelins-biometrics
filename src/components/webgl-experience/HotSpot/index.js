@@ -36,7 +36,7 @@ class HotSpot extends THREE.PointLight {
 
     this.addSphere();
 
-    this.initGUI();
+    //this.initGUI();
 
   }
 

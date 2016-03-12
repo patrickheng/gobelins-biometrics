@@ -72,7 +72,7 @@ class Hand extends THREE.Group {
 
       this.add( this.mesh );
 
-      this.initGUI();
+      //this.initGUI();
 
       this.generateHotSpots();
 

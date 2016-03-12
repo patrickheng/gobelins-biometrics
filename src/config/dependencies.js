@@ -8,7 +8,7 @@ import Renderer from '../components/webgl-experience/Core/Renderer';
 import PostProcessing from '../components/webgl-experience/PostProcessing/PostProcessing';
 import EffectComposer from '../components/webgl-experience/PostProcessing/EffectComposer';
 import Clock from '../components/webgl-experience/Utils/Clock';
-import GUI from '../components/webgl-experience/Utils/GUI';
+// import GUI from '../components/webgl-experience/Utils/GUI';
 
 export default [
   // --- Core
@@ -41,11 +41,11 @@ export default [
     constructor: EffectComposer,
     dependencies: [ 'Renderer', 'Configuration' ]
   },
-  {
-    type: 'service',
-    name: 'GUI',
-    constructor: GUI
-  },
+  // {
+  //   type: 'service',
+  //   name: 'GUI',
+  //   constructor: GUI
+  // },
   {
     type: 'service',
     name: 'PostProcessing',

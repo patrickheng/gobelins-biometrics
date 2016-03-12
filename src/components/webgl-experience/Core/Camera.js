@@ -1,6 +1,6 @@
 import Emitter from 'utils/Emitter';
 
-import OrbitControls from '../Utils/OrbitControls';
+// import OrbitControls from '../Utils/OrbitControls';
 
 import Container from 'Container';
 
@@ -48,16 +48,16 @@ class Camera extends THREE.PerspectiveCamera {
 
     this.gui = Container.get('GUI');
 
-    if( orbitControls ) {
-      this.controls = new OrbitControls( this, Container.get('Configuration').get('canvas') );
-    }
+    // if( orbitControls ) {
+    //   this.controls = new OrbitControls( this, Container.get('Configuration').get('canvas') );
+    // }
 
     this.mouseX = 0;
     this.mouseY = 0;
 
     this.isZoom = false;
 
-    this.initGUI();
+    //this.initGUI();
     this.addEventListeners();
   }
 

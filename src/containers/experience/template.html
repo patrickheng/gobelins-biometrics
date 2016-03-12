@@ -2,6 +2,11 @@
 
 	<div class="experience_container" v-on:click="onClick">
 
+		<div class="experience_loading" v-el="loader">
+			<span>CHARGEMENT ...</span>
+			<div class="experience_loading-icon"></div>
+		</div>
+
 		<webgl-experience-component></webgl-experience-component>
 
 		<current-intersect-indicator-component></current-intersect-indicator-component>
