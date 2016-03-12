@@ -96,13 +96,16 @@ export default Vue.extend({
 
 		onSwitchChapter(ref) {
 
+      console.log('ref', ref);
+
+
       this.content.id= contentData[ref].id;
       this.content.ref= contentData[ref].ref;
       this.content.articles= contentData[ref].articles;
 
       this.nextTitle = contentData[ref].title;
 
-			this.isArticleViewMode = false;
+      this.isArticleViewMode = false;
 
       this.displayArticles();
 
@@ -112,7 +115,9 @@ export default Vue.extend({
         .fromTo(this.$els.title, 0.5, { y: 0 , opacity: 1 }, { y: -25, opacity: 0, ease: Expo.EaseOut, onComplete: ()=>{
           this.content.title = this.nextTitle;
         }})
-        .fromTo(this.$els.title, 0.5, { y: 25 , opacity: 0 }, { y: 0, opacity: 1, ease: Expo.EaseOut })
+
+      .fromTo(this.$els.title, 0.5, { y: 25 , opacity: 0 }, { y: 0, opacity: 1, ease: Expo.EaseOut })
+
 
 		},
 
@@ -150,7 +155,7 @@ export default Vue.extend({
       TweenMax.fromTo(this.$els.title, 2.5, {opacity: 0, y: 50}, {opacity: 1, y: 0, ease: Expo.easeOut}, 0.4);
 
       setTimeout(()=> {
-        TweenMax.staggerFromTo(articles, 2, {opacity: 0, x: 100}, {opacity: 1, x: 0, ease: Expo.easeOut}, 0.4);
+        TweenMax.staggerFromTo(articles, 1, {opacity: 0, x: 100}, {opacity: 1, x: 0, ease: Expo.easeOut}, 0.2);
       }, 300);
 
     },

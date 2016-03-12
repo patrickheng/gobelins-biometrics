@@ -14,7 +14,7 @@
 
       <div class="info-section_article-summary">
 
-        <img class="info-section_article-summary-image" src="/images/chapters-anim/{{content.ref}}.gif" alt="{{content.title}} intro" />
+        <img class="info-section_article-summary-image" v-el:img src="/images/chapters-anim/{{content.ref}}.gif" alt="{{content.title}} intro" />
 
         <ul class="info-section_article-list" v-el:articlelist>
 
@@ -39,9 +39,9 @@
           Revenir à l'index
         </button>
 
-        <img class="info-section_article-picture" src="http://lorempicsum.com/up/627/300/4" alt="{{currentArticle.title}} " />
+        <!-- <img class="info-section_article-picture" src="http://lorempicsum.com/up/627/300/4" alt="{{currentArticle.title}} " /> -->
 
-        <h3 class="info-section_article-title info-section_article-title--article">{{currentArticle.title}} - <a href="{{currentArticle.link}}" class="info-seciton_article-link" target="_blank">{{currentArticle.source}}</a></h3>
+        <h3 class="info-section_article-title info-section_article-title--article">{{currentArticle.title}}<br><a href="{{currentArticle.link}}" class="info-seciton_article-link" target="_blank">{{currentArticle.source}}</a></h3>
 
         <span class="info-section_article-date">{{currentArticle.date}}</span>
 

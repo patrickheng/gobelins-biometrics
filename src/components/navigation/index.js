@@ -89,7 +89,6 @@ export default Vue.extend({
       this.navTimeout = setTimeout(()=> {
         this.currentIndex = (this.currentIndex > 0 ) ? this.currentIndex - 1 : this.nbChapters - 1;
         this.setNavigationChapter();
-        Emitter.emit(NAVIGATION_SWITCH_CHAPTER, this.contentDictionary[this.currentIndex]);
       }, 200);
     },
 
@@ -102,7 +101,6 @@ export default Vue.extend({
       this.navTimeout = setTimeout(()=> {
         this.currentIndex = (this.currentIndex < this.nbChapters - 1) ? this.currentIndex + 1 : 0;
         this.setNavigationChapter();
-        Emitter.emit(NAVIGATION_SWITCH_CHAPTER, this.contentDictionary[this.currentIndex]);
       }, 200);
     },
 
@@ -112,6 +110,8 @@ export default Vue.extend({
 
       this.previousChapter = contentData[this.contentDictionary[prevIndex]].title;
       this.nextChapter = contentData[this.contentDictionary[nextIndex]].title;
+
+      Emitter.emit(NAVIGATION_SWITCH_CHAPTER, this.contentDictionary[this.currentIndex]);
     },
 
     hideNavigation() {

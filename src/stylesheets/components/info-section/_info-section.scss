@@ -69,6 +69,10 @@
   transition: transform 1.5s ease(out-expo);
   &--article-view {
     transform: translate3d(-50%, 0, 0);
+    .info-section_article-summary {
+      overflow: hidden;
+      width: calc(50%);
+    }
   }
 }
 
@@ -79,25 +83,37 @@
 .info-section_chapter-title {
   font-family: $font-circular;
   font-size: 3rem;
-  margin-top: 4rem;
-  margin-left: 5%;
+  left: 5%;
+  position: absolute;
+  z-index: 2;
+  background: $color-blue-dark;
+  width: 90%;
+  padding: 4rem 3rem 2rem 3rem;
 }
 
 .info-section_article-summary,
 .info-section_article-content {
   @include clearfix;
+  @include custom-scrollbar;
   position: relative;
   float: left;
   width: 50%;
   height: 100%;
-  padding: 3rem 5% 0 5%;
+  padding: 12rem 5% 6rem 5%;
   font-family: $font-tstar;
+  overflow: hidden;
+}
+
+.info-section_article-summary {
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: calc(50% - 7px);
 }
 
 .info-section_article-summary-image {
   display: block;
   margin: auto;
-  width: 100%;  
+  width: 100%;
 }
 
 .info-section_article-element {
@@ -193,6 +209,7 @@
 
 .info-section_article-description {
   font-size: 1.5rem;
+  line-height: 2.3rem;
 }
 
 .info-seciton_article-link {
